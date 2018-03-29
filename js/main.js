@@ -55,22 +55,27 @@ const switchScreens = (evt) => {
   const firstScreen = 0;
   const lastScreen = screens.length - 1;
 
+  // текущий экран до выполнения функции switchScreens
+  const prevCurrentScreen = currentScreen;
+
   // если Alt + →, то переходим к след экрану
   if (keyCode === BUTTON_ARROW_RIGHT && evt.altKey) {
-    evt.preventDefault();
     if (currentScreen >= firstScreen && currentScreen < lastScreen) {
       currentScreen++;
-      showScreen(currentScreen);
     }
   }
 
   // если Alt + ←, то переходим к предыдущ экрану
   if (keyCode === BUTTON_ARROW_LEFT && evt.altKey) {
-    evt.preventDefault();
     if (currentScreen > firstScreen && currentScreen <= lastScreen) {
       currentScreen--;
-      showScreen(currentScreen);
     }
+  }
+
+  // если значение текущего экрана поменялось
+  // показываю новый экран
+  if (currentScreen === prevCurrentScreen) {
+    showScreen(currentScreen);
   }
 };
 
