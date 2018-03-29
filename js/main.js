@@ -74,7 +74,7 @@ const switchScreens = (evt) => {
 
   // если значение текущего экрана поменялось
   // показываю новый экран
-  if (currentScreen === prevCurrentScreen) {
+  if (currentScreen !== prevCurrentScreen) {
     showScreen(currentScreen);
   }
 };
