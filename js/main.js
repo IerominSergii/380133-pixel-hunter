@@ -14,7 +14,7 @@ let currentScreen = startScreen;
 const centralScreen = document.querySelector(`.central`);
 
 // функция добавления экрана на страницу по классу
-let addScreen = (screenName) => {
+const addScreen = (screenName) => {
   // нахожу template экрана по id
   let template = document.getElementById(screenName);
 
