@@ -75,7 +75,7 @@ const game2Node = () => {
 
   // перехожу на страницу с третьей игрой
   const switchGame3Screen = () => {
-    if (form.querySelectorAll(`input:checked`)) {
+    if (form.querySelector(`input:checked`)) {
       addGame3Node();
     }
   };
