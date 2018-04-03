@@ -70,34 +70,34 @@ const game2Node = () => {
   // добавление экрана со второй игрой
   fillNodeFromString(game2Template);
 
+  // нахожу форму и вопрос
   const form = document.querySelector(`.game__content`);
-  const answers = form.getElementsByTagName(`input`);
-  const [photo, paint] = answers;
+  const question1 = form.elements.question1;
 
-  // проверка, выбран ли один из ответов
-  const isAnswersChecked = () => {
-    const isPhotoChecked = photo.checked;
-    const isPaintChecked = paint.checked;
+  // функция проверки, выбран ли один из checkbox-ов
+  const isCheckboxChosen = (radioElem) => {
+    let isChosen = false;
 
-    if (isPhotoChecked || isPaintChecked) {
-      // переход на страницу с третьей игрой
-      return true;
-    } else {
-      return false;
-    }
+    radioElem.forEach((item) => {
+      if (item.checked) {
+        isChosen = true;
+      }
+    });
+
+    return isChosen;
   };
 
   // функция переключения на экран с третьей игрой
   const switchGame3Screen = () => {
     // проверка, выбран ли один из ответов
-    if (isAnswersChecked()) {
+    if (isCheckboxChosen(question1)) {
       addGame3Node();
     }
   };
 
-  // вешаю обработчик перехода на страницу со второй игрой
-  // если выбраны оба варианта ответа
-  form.addEventListener(`click`, switchGame3Screen);
+  // по окончании изменения значения одного из элементов формы
+  // перехожу на следующий экран
+  form.addEventListener(`change`, switchGame3Screen);
 };
 
 /*

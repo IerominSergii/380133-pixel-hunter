@@ -7,7 +7,6 @@ import addGreetingNode from './greeting.js';
 /*
   Список констант
 */
-
 // шаблон экрана загрузки
 const introTemplate = `<div id="main" class="central__content">
     <div id="intro" class="intro">
@@ -25,6 +24,10 @@ const introTemplate = `<div id="main" class="central__content">
       <a href="https://vk.com/htmlacademy" class="social-link  social-link--vk">Вконтакте</a>
     </div>
   </footer>`;
+
+// текущий экран в работе
+// const INITIAL_SCREEN = 0;
+// let currentScreen = INITIAL_SCREEN;
 
 // добавление экрана загрузки
 const addIntroNode = () => {
@@ -44,3 +47,4 @@ const addIntroNode = () => {
 // экспортирую функцию
 // добавления экрана загрузки
 export default addIntroNode;
+export {currentScreen};

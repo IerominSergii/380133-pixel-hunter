@@ -81,23 +81,28 @@ const game1Node = () => {
   // добавление экрана с первой игрой
   fillNodeFromString(game1Template);
 
-  // нахожу форму
+  // нахожу форму и оба вопроса
   const form = document.querySelector(`.game__content`);
+  const question1 = form.elements.question1;
+  const question2 = form.elements.question2;
 
-  // функция проверки, выбраны ли оба варианта ответа
-  const isAnswersChecked = () => {
-    const answers = form.getElementsByTagName(`input`);
-    const [photo1, paint1, photo2, paint2] = answers;
+  // функция проверки, выбран ли один из checkbox-ов с одинаковым именем
+  const isCheckboxChosen = (radioElem) => {
+    let isChosen = false;
 
-    const isPhoto1Checked = photo1.checked;
-    const isPaint1Checked = paint1.checked;
-    const isPhoto2Checked = photo2.checked;
-    const isPaint2Checked = paint2.checked;
-
-    if (isPhoto1Checked || isPaint1Checked) {
-      if (isPhoto2Checked || isPaint2Checked) {
-        return true;
+    radioElem.forEach((item) => {
+      if (item.checked) {
+        isChosen = true;
       }
+    });
+
+    return isChosen;
+  };
+
+  // функция проверки, сделан ли выбор на обоих checkbox формах
+  const isBothRadioChosen = (formWithRadio, radioElem1, radioElem2) => {
+    if (isCheckboxChosen(radioElem1) && isCheckboxChosen(radioElem2)) {
+      return true;
     }
 
     return false;
@@ -106,14 +111,15 @@ const game1Node = () => {
   // функция переключения на экран со второй игрой
   const switchGame2Screen = () => {
     // проверка, выбраны ли оба варианта ответа
-    if (isAnswersChecked()) {
+    if (isBothRadioChosen(form, question1, question2)) {
       addGame2Node();
     }
   };
 
-  // вешаю обработчик перехода на страницу со второй игрой
-  // если выбраны оба варианта ответа
-  form.addEventListener(`click`, switchGame2Screen);
+  // при изменении формы
+  // и если выбраны оба варианта ответа
+  // перехожу на страницу со второй игрой
+  form.addEventListener(`change`, switchGame2Screen);
 };
 
 /*
