@@ -72,25 +72,10 @@ const game2Node = () => {
 
   // нахожу форму и вопрос
   const form = document.querySelector(`.game__content`);
-  const question1 = form.elements.question1;
 
-  // функция проверки, выбран ли один из checkbox-ов
-  const isCheckboxChosen = (radioElem) => {
-    let isChosen = false;
-
-    radioElem.forEach((item) => {
-      if (item.checked) {
-        isChosen = true;
-      }
-    });
-
-    return isChosen;
-  };
-
-  // функция переключения на экран с третьей игрой
+  // перехожу на страницу с третьей игрой
   const switchGame3Screen = () => {
-    // проверка, выбран ли один из ответов
-    if (isCheckboxChosen(question1)) {
+    if (form.querySelectorAll(`input:checked`)) {
       addGame3Node();
     }
   };

@@ -73,9 +73,7 @@ const game3Node = () => {
 
   // на каждый элемент коллекции вешаю обработчик
   // перехода на страницу с результатами игры
-  gameOption.forEach((elem) => {
-    elem.addEventListener(`click`, addStatsNode);
-  });
+  gameOption.forEach((elem) => elem.addEventListener(`click`, addStatsNode));
 };
 
 /*

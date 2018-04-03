@@ -78,31 +78,18 @@ const game1Template = `<header class="header">
 // добавление экрана с первой игрой
 // и добавляю функционал для перехода на след экран
 const game1Node = () => {
-  // добавление экрана с первой игрой
   fillNodeFromString(game1Template);
 
-  // нахожу форму и оба вопроса
+  // нахожу форму
   const form = document.querySelector(`.game__content`);
-  const radio1 = form.querySelectorAll(`[name='question1']`);
-  const radio2 = form.querySelectorAll(`[name='question2']`);
 
-  // функция проверки, выбран ли один из checkbox-ов с одинаковым именем
-  const isRadioChosen = (arr) => [...arr].some((item) => item.checked);
-
-  // функция проверки, сделан ли выбор на обоих checkbox формах
-  const isBothRadioChosen = () => (isRadioChosen(radio1) && isRadioChosen(radio2)) ? true : false;
-
-  // функция переключения на экран со второй игрой
+  // перехожу на страницу со второй игрой, если выбраны оба варианта ответа
   const switchGame2Screen = () => {
-    // проверка, выбраны ли оба варианта ответа
-    if (isBothRadioChosen()) {
+    if (form.querySelectorAll(`input:checked`).length === 2) {
       addGame2Node();
     }
   };
 
-  // при изменении формы
-  // и если выбраны оба варианта ответа
-  // перехожу на страницу со второй игрой
   form.addEventListener(`change`, switchGame2Screen);
 };
 
