@@ -83,25 +83,17 @@ const game1Node = () => {
 
   // нахожу форму и оба вопроса
   const form = document.querySelector(`.game__content`);
-  const question1 = form.elements.question1;
-  const question2 = form.elements.question2;
+  const question1 = form.querySelectorAll(`[name='question1']`);
+  const question2 = form.querySelectorAll(`[name='question2']`);
+  // console.log(questions);
+
 
   // функция проверки, выбран ли один из checkbox-ов с одинаковым именем
-  const isCheckboxChosen = (radioElem) => {
-    let isChosen = false;
-
-    radioElem.forEach((item) => {
-      if (item.checked) {
-        isChosen = true;
-      }
-    });
-
-    return isChosen;
-  };
+  const isCheckboxChosen = (arr) => [...arr].some((item) => item.checked);
 
   // функция проверки, сделан ли выбор на обоих checkbox формах
-  const isBothRadioChosen = (formWithRadio, radioElem1, radioElem2) => {
-    if (isCheckboxChosen(radioElem1) && isCheckboxChosen(radioElem2)) {
+  const isBothRadioChosen = () => {
+    if (isCheckboxChosen(question1) && isCheckboxChosen(question2)) {
       return true;
     }
 
@@ -111,7 +103,7 @@ const game1Node = () => {
   // функция переключения на экран со второй игрой
   const switchGame2Screen = () => {
     // проверка, выбраны ли оба варианта ответа
-    if (isBothRadioChosen(form, question1, question2)) {
+    if (isBothRadioChosen()) {
       addGame2Node();
     }
   };

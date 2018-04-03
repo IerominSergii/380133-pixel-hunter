@@ -47,4 +47,3 @@ const addIntroNode = () => {
 // экспортирую функцию
 // добавления экрана загрузки
 export default addIntroNode;
-export {currentScreen};
