@@ -3,6 +3,7 @@
 */
 import fillNodeFromString from './../createNode.js';
 import addGreetingNode from './greeting.js';
+import backToGreeting from './backToGreeting.js';
 
 /*
  Список констант
@@ -132,10 +133,8 @@ const statsTemplate = `<header class="header">
 const statsNode = () => {
   fillNodeFromString(statsTemplate);
 
-  // на кнопку "Назад" вешаю обработчик
-  // перехода на страницу приветствия
-  const backButton = document.querySelector(`.back`);
-  backButton.addEventListener(`click`, addGreetingNode);
+  // функция возврата на экран приветствия по клику на кнопку "Назад"
+  backToGreeting();
 };
 
 /*

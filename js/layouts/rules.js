@@ -3,6 +3,7 @@
 */
 import createNodeFromString from './../createNode.js';
 import addGame1Node from './game1.js';
+import backToGreeting from './backToGreeting.js';
 
 /*
  Список констант
@@ -47,6 +48,9 @@ const rulesTemplate = `<header class="header">
 // добавление экрана с правилами
 const addRulesNode = () => {
   createNodeFromString(rulesTemplate);
+
+  // функция возврата на экран приветствия по клику на кнопку "Назад"
+  backToGreeting();
 
   const form = document.querySelector(`.rules__form`);
   const input = form.querySelector(`.rules__input`);

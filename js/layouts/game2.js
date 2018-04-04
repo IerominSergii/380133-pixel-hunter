@@ -3,6 +3,7 @@
 */
 import fillNodeFromString from './../createNode.js';
 import addGame3Node from './game3.js';
+import backToGreeting from './backToGreeting.js';
 
 /*
   Список констант
@@ -69,6 +70,9 @@ const game2Template = `<header class="header">
 const game2Node = () => {
   // добавление экрана со второй игрой
   fillNodeFromString(game2Template);
+
+  // функция возврата на экран приветствия по клику на кнопку "Назад"
+  backToGreeting();
 
   // нахожу форму и вопрос
   const form = document.querySelector(`.game__content`);
