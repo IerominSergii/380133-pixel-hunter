@@ -7,6 +7,7 @@ const plumber = require('gulp-plumber');
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const server = require('browser-sync').create();
+const mocha = require('gulp-mocha');
 const mqpacker = require('css-mqpacker');
 const minify = require('gulp-csso');
 const rename = require('gulp-rename');
@@ -105,4 +106,13 @@ gulp.task('assemble', ['clean'], function () {
 
 gulp.task('build', ['assemble'], function () {
   gulp.start('imagemin');
+});
+
+gulp.task('test', function () {
+  return gulp
+    .src(['js/**/*.test.js'], { read: false })
+    .pipe(mocha({
+      compilers: ['js:babel-register'],// Включим поддержку "import/export" в Mocha тестах
+      reporter: 'spec'// Вид в котором я хочу отображать результаты тестирования
+    }));
 });
