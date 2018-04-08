@@ -82,11 +82,12 @@ const createTimer = (time) => {
 
 const tick = (timerObj) => {
   if (timerObj.timer < 0 || timerObj.timer > 30) {
-    throw new Error(`Wrong time. Expect from 0 to 30`);
+    return -1;
+    // throw new Error(`Wrong time. Expect from 0 to 30`);
   }
 
   if (timerObj.timer === 0) {
-    return -1;
+    return -2;
   }
 
   return timerObj.timer - 1;

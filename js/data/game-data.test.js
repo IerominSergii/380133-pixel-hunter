@@ -1,5 +1,5 @@
 import {assert} from 'chai';
-import {MAX_QUESTION_AMOUNT, checkGameResult} from './game-data.js';
+import {MAX_QUESTION_AMOUNT, checkGameResult, tick} from './game-data.js';
 
 describe(`Check game results`, () => {
   describe(`Check game points`, () => {
@@ -79,6 +79,20 @@ describe(`Check game results`, () => {
         life: 5,
       };
       assert.equal(checkGameResult(testData3), -1, `Expected -1 but recieved ${testData3.life}`);
+    });
+  });
+
+  describe(`Check tick function`, () => {
+    it(`should return -1 if time is less than 0`, () => {
+      assert.equal(tick({timer: -2}), -1);
+    });
+
+    it(`should return -1 if time is more than 30`, () => {
+      assert.equal(tick({timer: 31}), -1);
+    });
+
+    it(`should return -2 if time is equal 0`, () => {
+      assert.equal(tick({timer: 0}), -2);
     });
   });
 });
