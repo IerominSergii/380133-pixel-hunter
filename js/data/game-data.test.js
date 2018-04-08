@@ -94,5 +94,9 @@ describe(`Check game results`, () => {
     it(`should return -2 if time is equal 0`, () => {
       assert.equal(tick({timer: 0}), -2);
     });
+
+    it(`should decrease timer`, () => {
+      assert.equal(tick({timer: 5}), 4);
+    });
   });
 });
