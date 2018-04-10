@@ -1,5 +1,5 @@
 import {assert} from 'chai';
-import {MAX_QUESTION_AMOUNT, checkGameResult, tick, INITIAL_GAME} from './game-data.js';
+import {MAX_QUESTION_AMOUNT, checkGameResult, createTimer} from './game-data.js';
 
 describe(`Check game results`, () => {
   describe(`Check game points`, () => {
@@ -82,23 +82,40 @@ describe(`Check game results`, () => {
     });
   });
 
-  describe(`Check tick function`, () => {
-    it(`should throws Error if time is less than 0`, () => {
-      assert.throws(tick(INITIAL_GAME, -1), /Wrong time. Expect from 0 to 30/);
+  describe(`Check createTimer function`, () => {
+    it(`should throws Error if time is not a number`, () => {
+      assert.throws(createTimer([-3]), /Wrong type. Expect number type./);
     });
 
-    // it(`should return -1 if time is more than 30`, () => {
-    //   assert.equal(tick({timer: 31}, 31), -1);
-    // });
-    //
-    // it(`should return -2 if time is equal 0`, () => {
-    //   assert.equal(tick({timer: 0}, 0), -2);
-    // });
+    it(`should throws Error if time is not an integer`, () => {
+      assert.throws(createTimer(2.1), /Time should be integer/);
+    });
+
+    it(`should throws Error if time is less than 0`, () => {
+      assert.throws(createTimer(-3), /Wrong time Expect more then 0/);
+    });
   });
 
-  // describe(`Check tick method`, () => {
-  //   it(`should decrease Object.timer by 1`, () => {
-  //     assert.equal(gameTimer.tick(), 29);
-  //   });
-  // });
+  describe(`Check tick method`, () => {
+    it(`should decrease time by 1`, () => {
+      const newTimer = createTimer(30);
+
+      assert.equal(newTimer.timer, 30);
+    });
+
+    it(`should decrease time by 2 if run tick twice`, () => {
+      const newTimer = createTimer(30);
+      const nextTimer = newTimer.tick();
+
+      assert.equal(nextTimer.timer, 29);
+    });
+
+    it(`should decrease time by 3 if run tick free times`, () => {
+      const newTimer = createTimer(30);
+      const nextTimer = newTimer.tick();
+      const lastTimer = nextTimer.tick();
+
+      assert.equal(lastTimer.timer, 28);
+    });
+  });
 });

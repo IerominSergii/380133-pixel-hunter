@@ -124,7 +124,7 @@ const checkGameResult = (gameObject) => {
 // };
 
 // функция создания объекта таймер
-const getTimer = (game, time) => {
+const createTimer = (time) => {
   if (typeof time !== `number`) {
     throw new Error(`Wrong type. Expect number type.`);
   }
@@ -133,22 +133,18 @@ const getTimer = (game, time) => {
     throw new Error(`Time should be integer`);
   }
 
-  if (time < 0 || time > 30) {
-    throw new Error(`Wrong time. Expect from 0 to 30`);
+  if (time < 0) {
+    throw new Error(`Wrong time Expect more then 0`);
   }
 
-  return Object.assign({}, game, {
-    timer: time
-  });
+  const currentTime = time;
+
+  return {
+    timer: currentTime,
+    tick() {
+      return createTimer(currentTime - 1);
+    }
+  };
 };
 
-// функция tick
-const tick = (gameObj) => {
-  if (gameObj.timer === 0) {
-    gameObj.answers.push(`wrong`);
-  }
-
-  return getTimer(gameObj, gameObj.timer - 1);
-};
-
-export {MAX_QUESTION_AMOUNT, checkGameResult, getTimer, tick};
+export {MAX_QUESTION_AMOUNT, checkGameResult, createTimer};
