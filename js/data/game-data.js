@@ -78,32 +78,32 @@ const checkGameResult = (gameObject) => {
 
 // =========== TIMER ==========
 // создание объекта таймера с методом tick
-const getTimer = (time) => {
-  if (typeof time !== `number`) {
-    throw new Error(`Wrong type. Expect number type.`);
-  }
-
-  if (!Number.isInteger(time)) {
-    throw new Error(`Time should be integer`);
-  }
-
-  if (time < 0 || time > 30) {
-    throw new Error(`Wrong time. Expect from 0 to 30`);
-  }
-
-  const newTimer = {
-    timer: time,
-    tick() {
-      if (time === 0) {
-        return `Time is over`;
-      }
-
-      return this.timer--;
-    }
-  };
-
-  return newTimer;
-};
+// const getTimer = (time) => {
+//   if (typeof time !== `number`) {
+//     throw new Error(`Wrong type. Expect number type.`);
+//   }
+//
+//   if (!Number.isInteger(time)) {
+//     throw new Error(`Time should be integer`);
+//   }
+//
+//   if (time < 0 || time > 30) {
+//     throw new Error(`Wrong time. Expect from 0 to 30`);
+//   }
+//
+//   const newTimer = {
+//     timer: time,
+//     tick() {
+//       if (time === 0) {
+//         return `Time is over`;
+//       }
+//
+//       return this.timer--;
+//     }
+//   };
+//
+//   return newTimer;
+// };
 
 
 // функция tick, которая уменьшает значение таймера на 1
@@ -122,5 +122,23 @@ const getTimer = (time) => {
 //
 //   return newGame;
 // };
+
+const getTimer = (game, time) => {
+  if (typeof time !== `number`) {
+    throw new Error(`Wrong type. Expect number type.`);
+  }
+
+  if (!Number.isInteger(time)) {
+    throw new Error(`Time should be integer`);
+  }
+
+  if (time < 0 || time > 30) {
+    throw new Error(`Wrong time. Expect from 0 to 30`);
+  }
+
+  return Object.assign({}, game, {
+    timer: time - 1
+  });
+};
 
 export {MAX_QUESTION_AMOUNT, checkGameResult, getTimer};
