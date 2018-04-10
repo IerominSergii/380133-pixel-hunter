@@ -123,6 +123,7 @@ const checkGameResult = (gameObject) => {
 //   return newGame;
 // };
 
+// функция создания объекта таймер
 const getTimer = (game, time) => {
   if (typeof time !== `number`) {
     throw new Error(`Wrong type. Expect number type.`);
@@ -137,8 +138,17 @@ const getTimer = (game, time) => {
   }
 
   return Object.assign({}, game, {
-    timer: time - 1
+    timer: time
   });
 };
 
-export {MAX_QUESTION_AMOUNT, checkGameResult, getTimer};
+// функция tick
+const tick = (gameObj) => {
+  if (gameObj.timer === 0) {
+    gameObj.answers.push(`wrong`);
+  }
+
+  return getTimer(gameObj, gameObj.timer - 1);
+};
+
+export {MAX_QUESTION_AMOUNT, checkGameResult, getTimer, tick};
