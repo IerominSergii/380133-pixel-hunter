@@ -1,5 +1,5 @@
 import {assert} from 'chai';
-import {MAX_QUESTION_AMOUNT, checkGameResult, tick} from './game-data.js';
+import {MAX_QUESTION_AMOUNT, checkGameResult, tick, INITIAL_GAME} from './game-data.js';
 
 describe(`Check game results`, () => {
   describe(`Check game points`, () => {
@@ -83,20 +83,22 @@ describe(`Check game results`, () => {
   });
 
   describe(`Check tick function`, () => {
-    it(`should return -1 if time is less than 0`, () => {
-      assert.equal(tick({timer: -2}), -1);
+    it(`should throws Error if time is less than 0`, () => {
+      assert.throws(tick(INITIAL_GAME, -1), /Wrong time. Expect from 0 to 30/);
     });
 
-    it(`should return -1 if time is more than 30`, () => {
-      assert.equal(tick({timer: 31}), -1);
-    });
-
-    it(`should return -2 if time is equal 0`, () => {
-      assert.equal(tick({timer: 0}), -2);
-    });
-
-    it(`should decrease timer`, () => {
-      assert.equal(tick({timer: 5}), 4);
-    });
+    // it(`should return -1 if time is more than 30`, () => {
+    //   assert.equal(tick({timer: 31}, 31), -1);
+    // });
+    //
+    // it(`should return -2 if time is equal 0`, () => {
+    //   assert.equal(tick({timer: 0}, 0), -2);
+    // });
   });
+
+  // describe(`Check tick method`, () => {
+  //   it(`should decrease Object.timer by 1`, () => {
+  //     assert.equal(gameTimer.tick(), 29);
+  //   });
+  // });
 });
