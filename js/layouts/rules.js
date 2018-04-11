@@ -3,7 +3,7 @@
 */
 import createNodeFromString from './../createNode.js';
 import addGame1Node from './game1.js';
-import backToGreeting from './backToGreeting.js';
+import {backToGreeting} from './greeting.js';
 
 /*
  Список констант

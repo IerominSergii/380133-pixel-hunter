@@ -2,7 +2,7 @@
  Набор импортированных значений
 */
 import fillNodeFromString from './../createNode.js';
-import backToGreeting from './backToGreeting.js';
+import {backToGreeting} from './greeting.js';
 
 /*
  Список констант
