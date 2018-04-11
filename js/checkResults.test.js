@@ -29,34 +29,34 @@ describe(`Check game points`, () => {
 
   it(`should count according answerValue (answer time)`, () => {
     const testData1 = {
-      answers: [`right`, `right`, `right`, `right`, `right`, `right`, `right`, `right`, `right`, `right`],
+      answers: [`right`, `right`, `right`, `right`, `right`, `right`, `right`, `right`, `wrong`, `wrong`],
       life: 1,
     };
-    assert.equal(checkGameResult(testData1), 1050);
+    assert.equal(checkGameResult(testData1), 850);
 
     const testData2 = {
       answers: [`fast`, `fast`, `fast`, `right`, `right`, `right`, `right`, `right`, `right`, `right`],
-      life: 1,
+      life: 3,
     };
-    assert.equal(checkGameResult(testData2), 1200);
+    assert.equal(checkGameResult(testData2), 1300);
 
     const testData3 = {
-      answers: [`slow`, `slow`, `slow`, `right`, `right`, `right`, `right`, `right`, `right`, `right`],
+      answers: [`wrong`, `wrong`, `slow`, `right`, `right`, `right`, `right`, `right`, `right`, `right`],
       life: 1,
     };
-    assert.equal(checkGameResult(testData3), 900);
+    assert.equal(checkGameResult(testData3), 800);
 
     const testData4 = {
-      answers: [`fast`, `fast`, `fast`, `slow`, `slow`, `slow`, `right`, `right`, `right`, `right`],
-      life: 0,
-    };
-    assert.equal(checkGameResult(testData4), 1000);
-
-    const testData5 = {
-      answers: [`fast`, `fast`, `fast`, `slow`, `slow`, `slow`, `right`, `right`, `right`, `right`],
+      answers: [`wrong`, `fast`, `fast`, `slow`, `slow`, `slow`, `right`, `right`, `right`, `right`],
       life: 2,
     };
-    assert.notEqual(checkGameResult(testData5), 1000);
+    assert.equal(checkGameResult(testData4), 950);
+
+    const testData5 = {
+      answers: [`right`, `right`, `right`, `right`, `right`, `right`, `right`, `right`, `right`, `right`],
+      life: 3,
+    };
+    assert.equal(checkGameResult(testData5), 1150);
   });
 });
 
