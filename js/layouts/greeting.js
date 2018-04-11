@@ -44,10 +44,20 @@ const addGreetingNode = () => {
   greetingContinue.addEventListener(`click`, addRulesNode);
 };
 
+// фунция возврата на экран приветствия по нажатию на кнопку "Назад"
+const backToGreeting = () => {
+  // нахожу кнопку "Назад"
+  const backButton = document.querySelector(`.back`);
+
+  // переход на страницу приветствия по клику на кнопку "Назад"
+  backButton.addEventListener(`click`, addGreetingNode);
+};
+
 /*
  Набор экспортированных значений
 */
 
 // экспортирую функцию
-// добавления экрана приветствия
-export default addGreetingNode;
+// добавления экрана приветствия и
+// функцию возкрата на экран приветствия по нажатию на стрелку обратно
+export {addGreetingNode, backToGreeting};
