@@ -1,30 +1,17 @@
 /*
  Набор импортированных значений
 */
-import fillNodeFromString from './../createNode.js';
+import {addAfterBeginCentral} from './../createNode.js';
+import {headerTemplate} from './header.js';
 import addGame2Node from './game2.js';
-import {backToGreeting} from './greeting.js';
+import {backToGreeting} from './header.js';
 
 /*
  Список констант
 */
 
 // шаблон экрана первой игры
-const game1Template = `<header class="header">
-  <div class="header__back">
-    <button class="back">
-      <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
-      <img src="img/logo_small.svg" width="101" height="44">
-    </button>
-  </div>
-  <h1 class="game__timer">NN</h1>
-  <div class="game__lives">
-    <img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">
-    <img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">
-    <img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">
-  </div>
-</header>
-<div class="game">
+const game1Template = `<div class="game">
   <p class="game__task">Угадайте для каждого изображения фото или рисунок?</p>
   <form class="game__content">
     <div class="game__option">
@@ -64,25 +51,18 @@ const game1Template = `<header class="header">
       <li class="stats__result stats__result--unknown"></li>
     </ul>
   </div>
-</div>
-<footer class="footer">
-  <a href="https://htmlacademy.ru" class="social-link social-link--academy">HTML Academy</a>
-  <span class="footer__made-in">Сделано в <a href="https://htmlacademy.ru" class="footer__link">HTML Academy</a> &copy; 2016</span>
-  <div class="footer__social-links">
-    <a href="https://twitter.com/htmlacademy_ru" class="social-link  social-link--tw">Твиттер</a>
-    <a href="https://www.instagram.com/htmlacademy/" class="social-link  social-link--ins">Инстаграм</a>
-    <a href="https://www.facebook.com/htmlacademy" class="social-link  social-link--fb">Фэйсбук</a>
-    <a href="https://vk.com/htmlacademy" class="social-link  social-link--vk">Вконтакте</a>
-  </div>
-</footer>`;
+</div>`;
 
 // добавление экрана с первой игрой
 // и добавляю функционал для перехода на след экран
 const game1Node = () => {
-  fillNodeFromString(game1Template);
+  const rules = document.querySelector(`.rules`);
+  rules.remove();
+  // добавление экрана с первой игрой
+  addAfterBeginCentral(game1Template);
 
-  // функция возврата на экран приветствия по клику на кнопку "Назад"
-  backToGreeting();
+  // добавление header
+  addAfterBeginCentral(headerTemplate);
 
   // функция возврата на экран приветствия по клику на кнопку "Назад"
   backToGreeting();

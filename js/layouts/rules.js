@@ -1,9 +1,9 @@
 /*
  Набор импортированных значений
 */
-import createNodeFromString from './../createNode.js';
+import {addAfterBeginCentral} from './../createNode.js';
 import addGame1Node from './game1.js';
-import {backToGreeting} from './greeting.js';
+import {backToGreeting} from './header.js';
 
 /*
  Список констант
@@ -33,21 +33,13 @@ const rulesTemplate = `<header class="header">
     <input class="rules__input" type="text" placeholder="Ваше Имя">
     <button class="rules__button  continue" type="submit" disabled>Go!</button>
   </form>
-</div>
-<footer class="footer">
-  <a href="https://htmlacademy.ru" class="social-link social-link--academy">HTML Academy</a>
-  <span class="footer__made-in">Сделано в <a href="https://htmlacademy.ru" class="footer__link">HTML Academy</a> &copy; 2016</span>
-  <div class="footer__social-links">
-    <a href="https://twitter.com/htmlacademy_ru" class="social-link  social-link--tw">Твиттер</a>
-    <a href="https://www.instagram.com/htmlacademy/" class="social-link  social-link--ins">Инстаграм</a>
-    <a href="https://www.facebook.com/htmlacademy" class="social-link  social-link--fb">Фэйсбук</a>
-    <a href="https://vk.com/htmlacademy" class="social-link  social-link--vk">Вконтакте</a>
-  </div>
-</footer>`;
+</div>`;
 
 // добавление экрана с правилами
 const addRulesNode = () => {
-  createNodeFromString(rulesTemplate);
+  const greeting = document.querySelector(`.greeting`);
+  greeting.remove();
+  addAfterBeginCentral(rulesTemplate);
 
   // функция возврата на экран приветствия по клику на кнопку "Назад"
   backToGreeting();
