@@ -3,7 +3,6 @@
 */
 import {addFragmentFromTemplate} from './../createNode.js';
 import addStatsNode from './stats.js';
-import {backToGreeting} from './greeting.js';
 
 /*
   Список констант

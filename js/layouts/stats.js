@@ -2,7 +2,6 @@
  Набор импортированных значений
 */
 import {addAfterBeginCentral} from './../createNode.js';
-import {backToGreeting} from './greeting.js';
 
 /*
  Список констант
