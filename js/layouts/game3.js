@@ -1,7 +1,7 @@
 import {addFragmentFromTemplate} from './../createNode.js';
 import addStatsNode from './stats.js';
-import {question3} from './question3.js';
-import {questions} from './../data/questionsData.js';
+import {questionTemplate} from './questionsTemplate.js';
+import {questions} from './../data/questions-data.js';
 
 // добавление экрана с третьей игрой
 // и добавляю функционал для перехода на след экран
@@ -11,8 +11,8 @@ const game3Node = () => {
 
   const header = document.querySelector(`.header`);
   // добавление экрана с третьей игрой
-  // header.after(addFragmentFromTemplate(game3Template));
-  header.after(addFragmentFromTemplate(question3(questions[0])));
+  const nextQuestionScreen = questions.shift();
+  header.after(addFragmentFromTemplate(questionTemplate(nextQuestionScreen)));
 
   // функция возврата на экран приветствия по клику на кнопку "Назад"
   // backToGreeting();

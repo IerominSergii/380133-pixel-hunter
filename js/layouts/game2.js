@@ -1,8 +1,7 @@
 import {addFragmentFromTemplate} from './../createNode.js';
 import addGame3Node from './game3.js';
-// import {question2} from './question2.js';
-import {questionTemplate} from './questions.js';
-import {questions} from './../data/questionsData.js';
+import {questionTemplate} from './questionsTemplate.js';
+import {questions} from './../data/questions-data.js';
 
 // добавление экрана со второй игрой
 // и добавляю функционал для перехода на след экран

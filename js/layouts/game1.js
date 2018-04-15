@@ -3,8 +3,8 @@ import {headerTemplate} from './header.js';
 import {INITIAL_GAME} from './../data/game-data.js';
 import addGame2Node from './game2.js';
 import {backToGreeting} from './header.js';
-import {questionTemplate} from './questions.js';
-import {questions} from './../data/questionsData.js';
+import {questionTemplate} from './questionsTemplate.js';
+import {questions} from './../data/questions-data.js';
 
 // добавление экрана с первой игрой
 // и добавляю функционал для перехода на след экран
