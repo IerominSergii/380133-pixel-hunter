@@ -8,7 +8,7 @@ const countPoints = (gameObject) => {
     throw new Error(`Wrong type of answers. Expected array`);
   }
 
-  if (answers.length > 0 && answers.length < MAX_QUESTION_AMOUNT) {
+  if (answers.length !== MAX_QUESTION_AMOUNT) {
     return -1;
   }
 
@@ -38,7 +38,7 @@ const countLifes = (gameObject) => {
 
 // =========== SUM ==========
 // подсчет итоговых результатов игры
-const checkGameResult = (gameObject) => {
+export const checkGameResult = (gameObject) => {
 
   const pointsResult = countPoints(gameObject);
   const lifesResult = countLifes(gameObject);
@@ -48,5 +48,3 @@ const checkGameResult = (gameObject) => {
   }
   return pointsResult + lifesResult;
 };
-
-export {checkGameResult};
