@@ -1,13 +1,6 @@
-/*
- Набор импортированных значений
-*/
 import {addAfterBeginCentral} from './../createNode.js';
-import addGame1Node from './game1.js';
+import {addGame1Node} from './game1.js';
 import {backToGreeting} from './header.js';
-
-/*
- Список констант
-*/
 
 // шаблон экрана с правилами игры
 const rulesTemplate = `<header class="header">
@@ -36,7 +29,7 @@ const rulesTemplate = `<header class="header">
 </div>`;
 
 // добавление экрана с правилами
-const addRulesNode = () => {
+export const addRulesNode = () => {
   const greeting = document.querySelector(`.greeting`);
   greeting.remove();
   addAfterBeginCentral(rulesTemplate);
@@ -68,11 +61,3 @@ const addRulesNode = () => {
   // по отправке формы
   form.addEventListener(`submit`, addGame1Node);
 };
-
-/*
- Набор экспортированных значений
-*/
-
-// экспортирую функцию
-// добавления экрана с правилами
-export default addRulesNode;

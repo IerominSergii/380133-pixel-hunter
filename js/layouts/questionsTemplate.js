@@ -1,17 +1,18 @@
-import {question1} from './questionTwice.js';
-import {question2} from './questionSingle.js';
-import {question3} from './questionTriple.js';
+import {questionTwice} from './questionTwice.js';
+import {questionSingle} from './questionSingle.js';
+import {questionTriple} from './questionTriple.js';
+import {renderStats} from './statsTemplate.js';
 
 const currentTemplate = (question) => {
   switch (question.type) {
     case `twice`: {
-      return question1(question);
+      return questionTwice(question);
     }
     case `single`: {
-      return question2(question);
+      return questionSingle(question);
     }
     case `triple`: {
-      return question3(question);
+      return questionTriple(question);
     }
     default: {
       throw new Error(`Unknown question type was given.`);
@@ -19,22 +20,10 @@ const currentTemplate = (question) => {
   }
 };
 
-export const questionTemplate = (questionOptions) => {
+export const questionTemplate = (questionOptions, state) => {
   return `<div class="game">
-  <p class="game__task">${currentTemplate(questionOptions).title}</p>
-    ${currentTemplate(questionOptions).optionsRendered}
-  <div class="stats">
-    <ul class="stats">
-      <li class="stats__result stats__result--wrong"></li>
-      <li class="stats__result stats__result--slow"></li>
-      <li class="stats__result stats__result--fast"></li>
-      <li class="stats__result stats__result--correct"></li>
-      <li class="stats__result stats__result--unknown"></li>
-      <li class="stats__result stats__result--unknown"></li>
-      <li class="stats__result stats__result--unknown"></li>
-      <li class="stats__result stats__result--unknown"></li>
-      <li class="stats__result stats__result--unknown"></li>
-      <li class="stats__result stats__result--unknown"></li>
-    </ul>
+  <p class="game__task">${(currentTemplate(questionOptions)).title}</p>
+    ${(currentTemplate(questionOptions)).optionsRendered}
+    ${renderStats(state)}
   </div>`;
 };

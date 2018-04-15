@@ -1,6 +1,3 @@
-/*
-  Список констант
-*/
 // основной контейнер, в который загружаются экраны игры
 export const nodeCentral = document.querySelector(`.central`);
 
@@ -20,10 +17,3 @@ export const addFragmentFromTemplate = (template) => {
 
 export const addAfterBeginCentral = (template) => nodeCentral.insertAdjacentHTML(`afterBegin`, template);
 export const addBeforeEndCentral = (template) => nodeCentral.insertAdjacentHTML(`beforeEnd`, template);
-
-// загрузка шаблоны экрана игры
-// export const getGameTemplate = (gameLevel) => `<div class="game">
-//   <p class="game__task">${gameLevel.task}</p>
-//   <form class="game__content">${gameLevel.gameСontent}</form>
-//   <div class="stats">${gameLevel.stats}</div>
-// </div>`;

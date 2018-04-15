@@ -12,7 +12,7 @@ const gameOption = (option) => {
   </div>`;
 };
 
-export const question2 = (questionData) => {
+export const questionSingle = (questionData) => {
   return {
     title: `Угадай, фото или рисунок?`,
     optionsRendered: `<form class="game__content  game__content--wide">

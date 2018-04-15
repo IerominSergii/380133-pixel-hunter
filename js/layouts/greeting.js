@@ -1,5 +1,5 @@
 import {addAfterBeginCentral} from './../createNode.js';
-import addRulesNode from './rules.js';
+import {addRulesNode} from './rules.js';
 
 // шаблон приветственного экрана
 const greetingTemplate = `<div class="greeting central--blur">

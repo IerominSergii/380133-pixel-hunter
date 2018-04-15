@@ -29,31 +29,31 @@ describe(`Check game points`, () => {
 
   it(`should count according answerValue (answer time)`, () => {
     const testData1 = {
-      answers: [`right`, `right`, `right`, `right`, `right`, `right`, `right`, `right`, `wrong`, `wrong`],
+      answers: [`correct`, `correct`, `correct`, `correct`, `correct`, `correct`, `correct`, `correct`, `wrong`, `wrong`],
       life: 1,
     };
     assert.equal(checkGameResult(testData1), 850);
 
     const testData2 = {
-      answers: [`fast`, `fast`, `fast`, `right`, `right`, `right`, `right`, `right`, `right`, `right`],
+      answers: [`fast`, `fast`, `fast`, `correct`, `correct`, `correct`, `correct`, `correct`, `correct`, `correct`],
       life: 3,
     };
     assert.equal(checkGameResult(testData2), 1300);
 
     const testData3 = {
-      answers: [`wrong`, `wrong`, `slow`, `right`, `right`, `right`, `right`, `right`, `right`, `right`],
+      answers: [`wrong`, `wrong`, `slow`, `correct`, `correct`, `correct`, `correct`, `correct`, `correct`, `correct`],
       life: 1,
     };
     assert.equal(checkGameResult(testData3), 800);
 
     const testData4 = {
-      answers: [`wrong`, `fast`, `fast`, `slow`, `slow`, `slow`, `right`, `right`, `right`, `right`],
+      answers: [`wrong`, `fast`, `fast`, `slow`, `slow`, `slow`, `correct`, `correct`, `correct`, `correct`],
       life: 2,
     };
     assert.equal(checkGameResult(testData4), 950);
 
     const testData5 = {
-      answers: [`right`, `right`, `right`, `right`, `right`, `right`, `right`, `right`, `right`, `right`],
+      answers: [`correct`, `correct`, `correct`, `correct`, `correct`, `correct`, `correct`, `correct`, `correct`, `correct`],
       life: 3,
     };
     assert.equal(checkGameResult(testData5), 1150);
@@ -63,7 +63,7 @@ describe(`Check game points`, () => {
 describe(`Check game lifes`, () => {
   it(`should not allow the life amount less than 0`, () => {
     const testData1 = {
-      answers: [`right`, `right`, `right`, `right`, `right`, `right`, `right`, `right`, `right`, `right`],
+      answers: [`correct`, `correct`, `correct`, `correct`, `correct`, `correct`, `correct`, `correct`, `correct`, `correct`],
       life: -2,
     };
     assert.throws(() => checkGameResult(testData1), `Wrong life amount. It can't be less than 0`);

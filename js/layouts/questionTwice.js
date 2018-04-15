@@ -12,7 +12,7 @@ const gameOption = (option) => {
   </div>`;
 };
 
-export const question1 = (questionData) => {
+export const questionTwice = (questionData) => {
   return {
     title: `Угадайте для каждого изображения фото или рисунок?`,
     optionsRendered: `<form class="game__content">

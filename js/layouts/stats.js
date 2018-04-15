@@ -1,11 +1,4 @@
-/*
- Набор импортированных значений
-*/
 import {addAfterBeginCentral} from './../createNode.js';
-
-/*
- Список констант
-*/
 
 // шаблон экрана с результатами
 const statsTemplate = `<div class="result">
@@ -110,7 +103,7 @@ const statsTemplate = `<div class="result">
 </div>`;
 
 // добавление экрана с результатами
-const statsNode = () => {
+export const statsNode = () => {
   const game = document.querySelector(`.game`);
   game.remove();
 
@@ -122,11 +115,3 @@ const statsNode = () => {
   // функция возврата на экран приветствия по клику на кнопку "Назад"
   // backToGreeting();
 };
-
-/*
- Набор экспортированных значений
-*/
-
-// экспортирую функцию
-// добавления экрана с результатами
-export default statsNode;

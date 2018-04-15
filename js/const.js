@@ -10,7 +10,8 @@ export const LIFE_VALUE = 50;
 
 export const answerStatus = {
   fast: `fast`,
-  right: `right`,
+  correct: `correct`,
   slow: `slow`,
   wrong: `wrong`,
+  unknown: `unknown`,
 };

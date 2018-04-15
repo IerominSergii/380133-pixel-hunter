@@ -4,7 +4,7 @@ const getOption = (option) => {
   </div>`;
 };
 
-export const question3 = (questionData) => {
+export const questionTriple = (questionData) => {
   return {
     title: `Найдите рисунок среди изображений`,
     optionsRendered: `<form class="game__content  game__content--triple">

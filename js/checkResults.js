@@ -19,9 +19,9 @@ const countPoints = (gameObject) => {
 
   const fastAnswers = answers.filter((item) => item === answerStatus.fast);
   const slowAnswers = answers.filter((item) => item === answerStatus.slow);
-  const rightAnswers = answers.filter((item) => item === answerStatus.right);
+  const correctAnswers = answers.filter((item) => item === answerStatus.correct);
 
-  const sumPoints = (fastAnswers.length * ANSWER_VALUE.fast + slowAnswers.length * ANSWER_VALUE.slow + rightAnswers.length * ANSWER_VALUE.right);
+  const sumPoints = (fastAnswers.length * ANSWER_VALUE.fast + slowAnswers.length * ANSWER_VALUE.slow + correctAnswers.length * ANSWER_VALUE.correct);
 
   return sumPoints;
 };
