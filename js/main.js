@@ -1,7 +1,7 @@
 /*
  Набор импортированных значений
 */
-import addIntroNode from './layouts/intro.js';
+import {addIntroNode} from './layouts/intro.js';
 
 /*
  Тело модуля
