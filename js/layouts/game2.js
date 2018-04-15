@@ -6,7 +6,7 @@ import {INITIAL_GAME} from './../data/game-data.js';
 
 // добавление экрана со второй игрой
 // и добавляю функционал для перехода на след экран
-export const game2Node = () => {
+export const addGame2Node = () => {
   const game = document.querySelector(`.game`);
   game.remove();
 

@@ -103,7 +103,7 @@ const statsTemplate = `<div class="result">
 </div>`;
 
 // добавление экрана с результатами
-export const statsNode = () => {
+export const addStatsNode = () => {
   const game = document.querySelector(`.game`);
   game.remove();
 

@@ -8,7 +8,7 @@ import {questions} from './../data/questions-data.js';
 
 // добавление экрана с первой игрой
 // и добавляю функционал для перехода на след экран
-export const game1Node = () => {
+export const addGame1Node = () => {
   const rules = document.querySelector(`.rules`);
   rules.remove();
 
