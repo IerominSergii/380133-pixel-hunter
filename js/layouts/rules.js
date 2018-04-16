@@ -1,6 +1,8 @@
 import {addAfterBeginCentral} from './../createNode.js';
-import {addGame1Node} from './game1.js';
-import {backToGreeting} from './header.js';
+// import {addGame1Node} from './game1.js';
+// import {backToGreeting} from './header.js';
+import {nextQuestion} from './../gameScreen.js';
+import {questions} from './../data/questions-data.js';
 
 // шаблон экрана с правилами игры
 const rulesTemplate = `<header class="header">
@@ -35,7 +37,7 @@ export const addRulesNode = () => {
   addAfterBeginCentral(rulesTemplate);
 
   // функция возврата на экран приветствия по клику на кнопку "Назад"
-  backToGreeting();
+  // backToGreeting();
 
   const form = document.querySelector(`.rules__form`);
   const input = form.querySelector(`.rules__input`);
@@ -59,5 +61,7 @@ export const addRulesNode = () => {
 
   // вешаю обработчик перехода на страницу с первой игрой
   // по отправке формы
-  form.addEventListener(`submit`, addGame1Node);
+  // form.addEventListener(`submit`, addGame1Node);
+  const addNextScreen = nextQuestion(questions);
+  form.addEventListener(`submit`, addNextScreen);
 };

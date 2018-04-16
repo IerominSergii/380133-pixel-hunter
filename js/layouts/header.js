@@ -1,4 +1,4 @@
-import {addGreetingNode} from './greeting.js';
+// import {addGreetingNode} from './greeting.js';
 
 const heartEmpty = `<img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">`;
 const heartFull = `<img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">`;
@@ -18,10 +18,10 @@ export const headerTemplate = (state) => `<header class="header">
 </header>`;
 
 // фунция возврата на экран приветствия по нажатию на кнопку "Назад"
-export const backToGreeting = () => {
-  // нахожу кнопку "Назад"
-  const backButton = document.querySelector(`.back`);
-
-  // переход на страницу приветствия по клику на кнопку "Назад"
-  backButton.addEventListener(`click`, addGreetingNode);
-};
+// export const backToGreeting = () => {
+//   // нахожу кнопку "Назад"
+//   const backButton = document.querySelector(`.back`);
+//
+//   // переход на страницу приветствия по клику на кнопку "Назад"
+//   backButton.addEventListener(`click`, addGreetingNode);
+// };

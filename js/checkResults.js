@@ -1,4 +1,4 @@
-import {MAX_QUESTION_AMOUNT, ANSWER_VALUE, LIFE_VALUE, answerStatus} from './const.js';
+import {MAX_QUESTION_AMOUNT, ANSWER_VALUE, LIFE_VALUE, answerStatus} from './constant.js';
 
 // =========== POINTS ==========
 // посчитать заработанные набранные очки

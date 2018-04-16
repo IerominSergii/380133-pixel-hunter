@@ -1,7 +1,7 @@
 import {addAfterBeginCentral} from './../createNode.js';
 
 // шаблон экрана с результатами
-const statsTemplate = `<div class="result">
+export const statsTemplate = `<div class="result">
   <h1>Победа!</h1>
   <table class="result__table">
     <tr>
@@ -104,8 +104,8 @@ const statsTemplate = `<div class="result">
 
 // добавление экрана с результатами
 export const addStatsNode = () => {
-  const game = document.querySelector(`.game`);
-  game.remove();
+  // const game = document.querySelector(`.game`);
+  // game.remove();
 
   const header = document.querySelector(`.header`);
   header.remove();
