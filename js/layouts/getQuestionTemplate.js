@@ -12,7 +12,6 @@ export const questionTempls = {
 export const questionTemplate = (state, dataElement) => {
   const type = dataElement.type;
   const currentTemplate = questionTempls[type];
-  // const currentTemplate = questionTempls.values(dataElement.type);
 
   return `<div class="game">
   <p class="game__task">${(currentTemplate(dataElement)).title}</p>

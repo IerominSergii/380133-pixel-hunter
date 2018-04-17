@@ -1,7 +1,8 @@
 import {addAfterBeginCentral} from './../createNode.js';
-// import {addGame1Node} from './game1.js';
 // import {backToGreeting} from './header.js';
-import {nextQuestion} from './../gameScreen.js';
+// import {nextQuestion} from './../gameScreen.js';
+import {addQuestionNode} from './addQuestionNode.js';
+import {INITIAL_GAME} from './../data/game-data.js';
 import {questions} from './../data/questions-data.js';
 
 // шаблон экрана с правилами игры
@@ -61,7 +62,13 @@ export const addRulesNode = () => {
 
   // вешаю обработчик перехода на страницу с первой игрой
   // по отправке формы
-  // form.addEventListener(`submit`, addGame1Node);
-  const addNextScreen = nextQuestion(questions);
+  const addNextScreen = () => {
+    const headerElement = document.querySelector(`.header`);
+    headerElement.remove();
+    const rulesElement = document.querySelector(`.rules`);
+    rulesElement.remove();
+    addQuestionNode(INITIAL_GAME, questions[0]);
+  };
+
   form.addEventListener(`submit`, addNextScreen);
 };
