@@ -6,6 +6,7 @@ const getOption = (option) => {
 
 export const questionTriple = (questionData) => {
   return {
+    type: `triple`,
     title: `Найдите рисунок среди изображений`,
     optionsRendered: `<form class="game__content  game__content--triple">
       ${questionData.options.map(getOption).join(``)}

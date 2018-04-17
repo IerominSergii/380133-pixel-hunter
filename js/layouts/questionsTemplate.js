@@ -3,27 +3,20 @@ import {questionSingle} from './questionSingle.js';
 import {questionTriple} from './questionTriple.js';
 import {renderStats} from './statsTemplate.js';
 
-const currentTemplate = (question) => {
-  switch (question.type) {
-    case `twice`: {
-      return questionTwice(question);
-    }
-    case `single`: {
-      return questionSingle(question);
-    }
-    case `triple`: {
-      return questionTriple(question);
-    }
-    default: {
-      throw new Error(`Unknown question type was given.`);
-    }
-  }
+export const questionTempls = {
+  single: questionSingle,
+  twice: questionTwice,
+  triple: questionTriple,
 };
 
-export const questionTemplate = (questionOptions, state) => {
+export const questionTemplate = (state, dataElement) => {
+  const type = dataElement.type;
+  const currentTemplate = questionTempls[type];
+  // const currentTemplate = questionTempls.values(dataElement.type);
+
   return `<div class="game">
-  <p class="game__task">${(currentTemplate(questionOptions)).title}</p>
-    ${(currentTemplate(questionOptions)).optionsRendered}
+  <p class="game__task">${(currentTemplate(dataElement)).title}</p>
+    ${(currentTemplate(dataElement)).optionsRendered}
     ${renderStats(state)}
   </div>`;
 };

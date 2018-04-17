@@ -14,6 +14,7 @@ const gameOption = (option) => {
 
 export const questionTwice = (questionData) => {
   return {
+    type: `twice`,
     title: `Угадайте для каждого изображения фото или рисунок?`,
     optionsRendered: `<form class="game__content">
       ${questionData.options.map(gameOption).join(``)}

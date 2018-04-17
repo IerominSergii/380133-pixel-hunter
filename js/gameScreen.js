@@ -5,14 +5,14 @@ import {questions} from './data/questions-data.js';
 import {questionTemplate} from './layouts/questionsTemplate.js';
 import {statsTemplate} from './layouts/stats.js';
 
-// добавление header
-addAfterBeginCentral(headerTemplate(INITIAL_GAME));
-
 const header = document.querySelector(`.header`);
 
-const nextGameContent = (element) => {
-  if (element) {
-    element.remove();
+// добавление экрана с игрой
+const gameContentNode = document.querySelector(`.game__content`);
+
+const nextGameContent = () => {
+  if (gameContentNode) {
+    gameContentNode.remove();
   }
 
   const newQuestionScreen = questions.shift();
@@ -48,9 +48,6 @@ const provideStatsScreen = () => {
 };
 
 export const nextQuestion = (questionsArray) => {
-  // добавление экрана с игрой
-  const gameContentNode = document.querySelector(`.game__content`);
-
   if (!gameContentNode) {
     return nextGameContent();
   }
@@ -74,3 +71,8 @@ export const nextQuestion = (questionsArray) => {
     }
   }
 };
+
+// добавление header
+addAfterBeginCentral(headerTemplate(INITIAL_GAME));
+
+nextQuestion(questions.options);

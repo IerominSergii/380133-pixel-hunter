@@ -14,6 +14,7 @@ const gameOption = (option) => {
 
 export const questionSingle = (questionData) => {
   return {
+    type: `single`,
     title: `Угадай, фото или рисунок?`,
     optionsRendered: `<form class="game__content  game__content--wide">
     ${gameOption(questionData.options[0])}
