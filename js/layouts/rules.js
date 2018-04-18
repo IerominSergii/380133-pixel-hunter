@@ -1,6 +1,4 @@
 import {addAfterBeginCentral} from './../createNode.js';
-// import {backToGreeting} from './header.js';
-// import {nextQuestion} from './../gameScreen.js';
 import {addQuestionNode} from './addQuestionNode.js';
 import {INITIAL_GAME} from './../data/game-data.js';
 import {questions} from './../data/questions-data.js';
@@ -67,7 +65,7 @@ export const addRulesNode = () => {
     headerElement.remove();
     const rulesElement = document.querySelector(`.rules`);
     rulesElement.remove();
-    addQuestionNode(INITIAL_GAME, questions[0]);
+    addQuestionNode(questions, INITIAL_GAME);
   };
 
   form.addEventListener(`submit`, addNextScreen);

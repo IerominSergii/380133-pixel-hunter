@@ -1,11 +1,9 @@
-const getResults = (answer) => {
-  return `<li class="stats__result stats__result--${answer}"></li>`;
-};
-
-export const renderStats = (state) => {
+const renderStats = function (state) {
   return `<div class="stats">
     <ul class="stats">
-      ${state.answers.map(getResults).join(`\n      `)}
+      ${state.answers.map((answer) => `<li class="stats__result stats__result--${answer}"></li>`).join(``)}
     </ul>
   </div>`;
 };
+
+export {renderStats};
