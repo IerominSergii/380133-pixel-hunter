@@ -1,9 +1,14 @@
-import {addAfterBeginCentral, addFragmentFromTemplate} from './../createNode.js';
+// import {addFragmentFromTemplate} from './../createNode.js';
 // import {addQuestionNode} from './addQuestionNode.js';
 // import {INITIAL_GAME} from './../data/game-data.js';
 import {questions} from './../data/questions-data.js';
-import {getSingle} from './questionSingle.js';
-import {nextScreen} from './game.js';
+import {getSingleTemplate, getSingle} from './questionSingle.js';
+// import {nextScreen} from './game.js';
+
+import {headerTemplate} from './header';
+import {INITIAL_GAME} from './../data/game-data.js';
+
+import {footerTemplate} from './footer.js';
 
 // шаблон экрана с правилами игры
 const rulesTemplate = `<header class="header">
@@ -34,11 +39,12 @@ const rulesTemplate = `<header class="header">
 // добавление экрана с правилами
 export const addRulesNode = () => {
   const greeting = document.querySelector(`.greeting`);
-  greeting.remove();
-  addAfterBeginCentral(rulesTemplate);
 
-  // функция возврата на экран приветствия по клику на кнопку "Назад"
-  // backToGreeting();
+  greeting.remove();
+
+  const central = document.querySelector(`.central`);
+
+  central.insertAdjacentHTML(`afterBegin`, rulesTemplate);
 
   const form = document.querySelector(`.rules__form`);
   const input = form.querySelector(`.rules__input`);
@@ -60,12 +66,23 @@ export const addRulesNode = () => {
     }
   });
 
-  const currentQuestion = questions.shift();
-  // const getSingleScreen = () => {
-  //   return addFragmentFromTemplate(getSingle(currentQuestion.options, nextScreen));
-  // };
-  //
-  form.addEventListener(`submit`, () => {
-    addFragmentFromTemplate(getSingle(currentQuestion.options, nextScreen));
-  });
+  const addHeaderTest = () => {
+    const centralEl = document.querySelector(`.central`);
+    const currentOption = questions.shift();
+
+    centralEl.innerHTML = `
+    ${headerTemplate(INITIAL_GAME)}
+    ${getSingleTemplate(currentOption)}
+    ${footerTemplate}
+    `;
+
+    const nextOptions = questions.shift();
+    getSingle(nextOptions, addHeaderTest);
+    // const templ = headerTemplate(INITIAL_GAME);
+    // centralEl.appendChild(templ);
+  };
+
+  // const currentQuestion = questions.shift();
+  form.addEventListener(`submit`, addHeaderTest);
+  // appendNode(getSingle(currentQuestion.options, nextScreen)););
 };

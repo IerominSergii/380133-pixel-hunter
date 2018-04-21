@@ -20,7 +20,7 @@ export const createElement = (template) => {
 export const addFragmentFromTemplate = (template) => {
   const container = document.createElement(`div`);
   container.innerHTML = template;
-  return container.firstChild;
+  return container;
 };
 
 export const addAfterBeginCentral = (template) => {
@@ -32,3 +32,11 @@ export const addBeforeEndCentral = (template) => {
   const central = document.querySelector(`.central`);
   central.insertAdjacentHTML(`beforeEnd`, template);
 };
+
+export const appendNode = (template) => {
+  // основной контейнер, в который загружаются экраны игры
+  const element = document.querySelector(`.central`);
+  element.appendChild(template);
+};
+
+// =================== @fix новые - все что выше - удали!!! ===================

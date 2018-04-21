@@ -2,7 +2,7 @@ const heartEmpty = `<img src="img/heart__empty.svg" class="game__heart" alt="Lif
 const heartFull = `<img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">`;
 
 const headerTemplate = (state) => {
-  return `<header class="header">
+  const header = `<header class="header">
     <div class="header__back">
       <button class="back">
         <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
@@ -15,6 +15,7 @@ const headerTemplate = (state) => {
     ${new Array(state.life).fill(heartFull).join(``)}
     </div>
   </header>`;
+  return header;
 };
 
-export default headerTemplate;
+export {headerTemplate};

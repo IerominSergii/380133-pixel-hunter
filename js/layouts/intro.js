@@ -11,7 +11,7 @@ const introTemplate = `<div id="main" class="central__content">
   </div>`;
 
 // добавление экрана загрузки
-export const addIntroNode = () => {
+const addIntroNode = () => {
   fillNodeFromString(introTemplate);
   // добавляю footer
   addBeforeEndCentral(footerTemplate);
@@ -22,3 +22,5 @@ export const addIntroNode = () => {
   // по клику на `звездочку`
   asterisk.addEventListener(`click`, addGreetingNode);
 };
+
+export {addIntroNode};
