@@ -1,7 +1,9 @@
-import {addAfterBeginCentral} from './../createNode.js';
-import {addQuestionNode} from './addQuestionNode.js';
-import {INITIAL_GAME} from './../data/game-data.js';
+import {addAfterBeginCentral, addFragmentFromTemplate} from './../createNode.js';
+// import {addQuestionNode} from './addQuestionNode.js';
+// import {INITIAL_GAME} from './../data/game-data.js';
 import {questions} from './../data/questions-data.js';
+import {getSingle} from './questionSingle.js';
+import {nextScreen} from './game.js';
 
 // шаблон экрана с правилами игры
 const rulesTemplate = `<header class="header">
@@ -58,15 +60,12 @@ export const addRulesNode = () => {
     }
   });
 
-  // вешаю обработчик перехода на страницу с первой игрой
-  // по отправке формы
-  const addNextScreen = () => {
-    const headerElement = document.querySelector(`.header`);
-    headerElement.remove();
-    const rulesElement = document.querySelector(`.rules`);
-    rulesElement.remove();
-    addQuestionNode(questions, INITIAL_GAME);
-  };
-
-  form.addEventListener(`submit`, addNextScreen);
+  const currentQuestion = questions.shift();
+  // const getSingleScreen = () => {
+  //   return addFragmentFromTemplate(getSingle(currentQuestion.options, nextScreen));
+  // };
+  //
+  form.addEventListener(`submit`, () => {
+    addFragmentFromTemplate(getSingle(currentQuestion.options, nextScreen));
+  });
 };

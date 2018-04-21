@@ -1,3 +1,5 @@
+import {createElement} from './../createNode.js';
+
 const gameOption = (option) => {
   return `<div class="game__option">
     <img src="${option.src}" alt="${option.alt}" width="705" height="455">
@@ -12,12 +14,26 @@ const gameOption = (option) => {
   </div>`;
 };
 
-export const questionSingle = (questionData) => {
-  return {
-    type: `single`,
-    title: `Угадай, фото или рисунок?`,
-    optionsRendered: `<form class="game__content  game__content--wide">
-    ${gameOption(questionData.options[0])}
-    </form>`,
+const getSingleTemplate = (option) => {
+  return `<div class="game">
+  <p class="game__task">Угадай, фото или рисунок?</p>
+  <form class="game__content  game__content--wide">
+    ${gameOption(option)}
+  </form>
+  </div>`;
+};
+
+export const getSingle = (option, nextQuestion) => {
+  const template = createElement(getSingleTemplate(option));
+
+  const switchNextScreen = () => {
+    if (template.querySelectorAll(`input:checked`)) {
+      nextQuestion();
+    }
   };
+
+  const gameContent = template.querySelector(`.game__content`);
+  gameContent.addEventListener(`change`, switchNextScreen);
+
+  return template;
 };

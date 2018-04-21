@@ -1,11 +1,19 @@
 // основной контейнер, в который загружаются экраны игры
-export const nodeCentral = document.querySelector(`.central`);
+// const nodeCentral = document.querySelector(`.central`);
 
 // fillNodeFromString - переписывает содержимое .central ноды
 // на переданное в template
-export const fillNodeFromString = (template, element = nodeCentral) => {
+export const fillNodeFromString = (template) => {
+  // основной контейнер, в который загружаются экраны игры
+  const element = document.querySelector(`.central`);
   element.innerHTML = ``;
   element.innerHTML = template;
+};
+
+export const createElement = (template) => {
+  const outer = document.createElement(`div`);
+  outer.innerHTML = template;
+  return outer;
 };
 
 // addElementFromTemplate - добавляет в container template
@@ -15,5 +23,12 @@ export const addFragmentFromTemplate = (template) => {
   return container.firstChild;
 };
 
-export const addAfterBeginCentral = (template) => nodeCentral.insertAdjacentHTML(`afterBegin`, template);
-export const addBeforeEndCentral = (template) => nodeCentral.insertAdjacentHTML(`beforeEnd`, template);
+export const addAfterBeginCentral = (template) => {
+  const elementCentral = document.querySelector(`.central`);
+  elementCentral.insertAdjacentHTML(`afterBegin`, template);
+};
+
+export const addBeforeEndCentral = (template) => {
+  const central = document.querySelector(`.central`);
+  central.insertAdjacentHTML(`beforeEnd`, template);
+};
