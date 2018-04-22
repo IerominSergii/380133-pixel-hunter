@@ -1,3 +1,3 @@
-import {addIntroNode} from './layouts/intro.js';
+import {renderIntroScreen} from './layouts/intro.js';
 
-addIntroNode();
+renderIntroScreen();

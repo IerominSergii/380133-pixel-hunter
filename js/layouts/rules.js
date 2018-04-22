@@ -1,14 +1,4 @@
-// import {addFragmentFromTemplate} from './../createNode.js';
-// import {addQuestionNode} from './addQuestionNode.js';
-// import {INITIAL_GAME} from './../data/game-data.js';
-import {questions} from './../data/questions-data.js';
-import {getSingleTemplate, getSingle} from './questionSingle.js';
-// import {nextScreen} from './game.js';
-
-import {headerTemplate} from './header';
-import {INITIAL_GAME} from './../data/game-data.js';
-
-import {footerTemplate} from './footer.js';
+import {startGame} from './game.js';
 import {changeScreen} from './../util.js';
 
 // шаблон экрана с правилами игры
@@ -37,27 +27,12 @@ const rulesTemplate = `<header class="header">
   </form>
 </div>`;
 
-// добавление экрана с правилами
-export const addRulesNode = () => {
-  const greeting = document.querySelector(`.greeting`);
-  changeScreen(greeting, rulesTemplate);
-  // greeting.remove();
-
-  // const central = document.querySelector(`.central`);
-
-  // central.insertAdjacentHTML(`afterBegin`, rulesTemplate);
-
+const disableFormBtn = () => {
   const form = document.querySelector(`.rules__form`);
   const input = form.querySelector(`.rules__input`);
   const submitFormBtn = form.querySelector(`.rules__button`);
 
-  // кнопка отправки отключена,
-  // пока в поле с именем игрока ничего не введено
-  submitFormBtn.setAttribute(`disabled`, ``);
-
-  // проверка, если введено имя,
-  // то кнопка становится активной
-  form.addEventListener(`input`, () => {
+  const isFormBtnEmpty = () => {
     if (input.value) {
       submitFormBtn.removeAttribute(`disabled`);
     } else {
@@ -65,25 +40,26 @@ export const addRulesNode = () => {
         submitFormBtn.setAttribute(`disabled`, ``);
       }
     }
-  });
-
-  const addHeaderTest = () => {
-    const centralEl = document.querySelector(`.central`);
-    const currentOption = questions.shift();
-
-    centralEl.innerHTML = `
-    ${headerTemplate(INITIAL_GAME)}
-    ${getSingleTemplate(currentOption)}
-    ${footerTemplate}
-    `;
-
-    const nextOptions = questions.shift();
-    getSingle(nextOptions, addHeaderTest);
-    // const templ = headerTemplate(INITIAL_GAME);
-    // centralEl.appendChild(templ);
   };
 
-  // const currentQuestion = questions.shift();
-  form.addEventListener(`submit`, addHeaderTest);
-  // appendNode(getSingle(currentQuestion.options, nextScreen)););
+  // автофокус
+  input.focus();
+  // кнопка отключена, пока в поле с ничего не введено
+  submitFormBtn.setAttribute(`disabled`, ``);
+  // если введено имя, то кнопка становится активной
+  form.addEventListener(`input`, isFormBtnEmpty);
+};
+
+const addRulesHandlers = () => {
+  const form = document.querySelector(`.rules__form`);
+  form.addEventListener(`submit`, startGame);
+};
+
+// добавление экрана с правилами
+export const renderRulesNode = () => {
+  const greeting = document.querySelector(`.greeting`);
+  changeScreen(greeting, rulesTemplate);
+
+  disableFormBtn();
+  addRulesHandlers();
 };

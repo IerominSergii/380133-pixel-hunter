@@ -1,8 +1,8 @@
 import {addAfterBeginCentral} from './../createNode.js';
-import {addRulesNode} from './rules.js';
+import {renderRulesNode} from './rules.js';
 
 // шаблон приветственного экрана
-const greetingTemplate = `<div class="greeting central--blur">
+const addGreetingTemplate = `<div class="greeting central--blur">
   <div class="greeting__logo"><img src="img/logo_big.png" width="201" height="89" alt="Pixel Hunter"></div>
   <h1 class="greeting__asterisk">*</h1>
   <div class="greeting__challenge">
@@ -16,15 +16,15 @@ const greetingTemplate = `<div class="greeting central--blur">
   <div class="greeting__continue"><span><img src="img/arrow_right.svg" width="64" height="64" alt="Next"></span></div>
 </div>`;
 
-// добавление экрана приветствия
-export const addGreetingNode = () => {
-  const intro = document.getElementById(`main`);
-  intro.remove();
-  addAfterBeginCentral(greetingTemplate);
-
+const addGreetingHandlers = () => {
   const greetingContinue = document.querySelector(`.greeting__continue`);
 
-  // вешаю обработчик перехода на страницу с правилами
-  // по клику на `стрелку вправо`
-  greetingContinue.addEventListener(`click`, addRulesNode);
+  // переход на страницу с правилами по клику на `стрелку вправо`
+  greetingContinue.addEventListener(`click`, renderRulesNode);
+};
+
+// добавление экрана приветствия
+export const renderGreetingNode = () => {
+  addAfterBeginCentral(addGreetingTemplate);
+  addGreetingHandlers();
 };
