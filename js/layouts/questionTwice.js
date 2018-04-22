@@ -12,7 +12,7 @@ const gameOption = (option) => {
   </div>`;
 };
 
-export const questionTwice = (questionData) => {
+export const twice = (questionData) => {
   return {
     type: `twice`,
     title: `Угадайте для каждого изображения фото или рисунок?`,
@@ -20,4 +20,27 @@ export const questionTwice = (questionData) => {
       ${questionData.options.map(gameOption).join(``)}
     </form>`,
   };
+};
+
+export const twiceTemplate = () => {
+  return `<div class="game">
+  <p class="game__task">${twice.title}</p>
+  <form class="game__content  game__content--wide">
+    ${twice.optionsRendered}
+  </form>
+  </div>`;
+};
+
+export const twiceHandlers = (option, callback) => {
+  const central = document.querySelector(`.central`);
+
+  // перехожу к следующему вопросу, если выбраны оба варианта ответа
+  const nextQuestion = () => {
+    if (central.querySelectorAll(`input:checked`).length === 2) {
+      callback();
+    }
+  };
+
+  const gameContent = central.querySelector(`.game__content`);
+  gameContent.addEventListener(`change`, nextQuestion);
 };

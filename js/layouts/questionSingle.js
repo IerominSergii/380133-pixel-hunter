@@ -1,5 +1,3 @@
-// import {createElement} from './../createNode.js';
-
 const gameOption = (option) => {
   const singleOption = option.options[0];
   return `<div class="game__option">
@@ -16,11 +14,10 @@ const gameOption = (option) => {
 };
 
 export const singleTemplate = (option) => {
-  const opt = gameOption(option);
   return `<div class="game">
   <p class="game__task">Угадай, фото или рисунок?</p>
   <form class="game__content  game__content--wide">
-    ${opt}
+    ${gameOption(option)}
   </form>
   </div>`;
 };
@@ -37,19 +34,3 @@ export const singleHandlers = (option, callback) => {
   const gameContent = central.querySelector(`.game__content`);
   gameContent.addEventListener(`change`, nextQuestion);
 };
-
-// export const getSingle = (option, nextQuestion) => {
-//   const central = document.querySelector(`.central`);
-//
-//   // central.insertAdjacentHTML(`afterBegin`, singleTemplate(option));
-//   // const template = createElement(singleTemplate(option));
-//
-//   const switchNextScreen = () => {
-//     if (central.querySelectorAll(`input:checked`)) {
-//       nextQuestion();
-//     }
-//   };
-//
-//   const gameContent = central.querySelector(`.game__content`);
-//   gameContent.addEventListener(`change`, switchNextScreen);
-// };

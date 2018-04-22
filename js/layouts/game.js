@@ -34,3 +34,5 @@ export const nextGame = () => {
   const nextOptions = questions.shift();
   singleHandlers(nextOptions, nextGame);
 };
+
+// const endGame = () => {};
