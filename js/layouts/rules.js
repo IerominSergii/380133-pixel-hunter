@@ -52,6 +52,7 @@ const disableFormBtn = () => {
 
 const addRulesHandlers = () => {
   const form = document.querySelector(`.rules__form`);
+
   form.addEventListener(`submit`, startGame);
 };
 
