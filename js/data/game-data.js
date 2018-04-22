@@ -4,3 +4,12 @@ export const INITIAL_GAME = {
   life: 3,
   timer: 30,
 };
+
+export const screens = [
+  `intro`,
+  `greeting`,
+  `rules`,
+  `singleGame`,
+  `twiceGame`,
+  `tripleGame`,
+];

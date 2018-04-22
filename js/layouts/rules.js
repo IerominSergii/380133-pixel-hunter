@@ -9,6 +9,7 @@ import {headerTemplate} from './header';
 import {INITIAL_GAME} from './../data/game-data.js';
 
 import {footerTemplate} from './footer.js';
+import {changeScreen} from './../util.js';
 
 // шаблон экрана с правилами игры
 const rulesTemplate = `<header class="header">
@@ -39,12 +40,12 @@ const rulesTemplate = `<header class="header">
 // добавление экрана с правилами
 export const addRulesNode = () => {
   const greeting = document.querySelector(`.greeting`);
+  changeScreen(greeting, rulesTemplate);
+  // greeting.remove();
 
-  greeting.remove();
+  // const central = document.querySelector(`.central`);
 
-  const central = document.querySelector(`.central`);
-
-  central.insertAdjacentHTML(`afterBegin`, rulesTemplate);
+  // central.insertAdjacentHTML(`afterBegin`, rulesTemplate);
 
   const form = document.querySelector(`.rules__form`);
   const input = form.querySelector(`.rules__input`);
