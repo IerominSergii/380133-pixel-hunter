@@ -104,9 +104,6 @@ export const statsTemplate = `<div class="result">
 
 // добавление экрана с результатами
 export const addStatsNode = () => {
-  // const game = document.querySelector(`.game`);
-  // game.remove();
-
   const header = document.querySelector(`.header`);
   header.remove();
   // добавление экрана с результатами игры

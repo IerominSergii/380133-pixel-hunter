@@ -40,3 +40,7 @@ export const appendNode = (template) => {
 };
 
 // =================== @fix новые - все что выше - удали!!! ===================
+export const addAfterBegin = (element, template) => {
+  const elementCentral = document.querySelector(`.central`);
+  elementCentral.insertAdjacentHTML(`afterBegin`, template);
+};
