@@ -1,38 +1,43 @@
 import {headerTemplate} from './header';
 import {INITIAL_GAME} from './../data/game-data.js';
-// import {appendNode} from './../createNode.js';
 
 import {questions} from './../data/questions-data.js';
-import {singleTemplate, singleHandlers} from './questionSingle.js';
-// import {footerTemplate} from './footer.js';
+import {footerTemplate} from './footer.js';
 
+import {questionsTemplate, questionsHandlers} from './questions.js';
 
-// !!!!!!!!
+let game = Object.assign({}, INITIAL_GAME);
+
 export const startGame = () => {
   const central = document.querySelector(`.central`);
   const currentOption = questions.shift();
-  // const type = currentOption.type;
+  const type = currentOption.type;
+  const gameTemplate = questionsTemplate[type];
 
   central.innerHTML = `
   ${headerTemplate(INITIAL_GAME)}
-  ${singleTemplate(currentOption)}
+  ${gameTemplate(currentOption)}
+  ${footerTemplate}
   `;
 
-  const nextOptions = questions.shift();
-  singleHandlers(nextOptions, nextGame);
+  const addHandler = questionsHandlers[type];
+  addHandler(nextGame);
 };
 
 export const nextGame = () => {
   const central = document.querySelector(`.central`);
   const currentOption = questions.shift();
+  const type = currentOption.type;
+  const gameTemplate = questionsTemplate[type];
 
   central.innerHTML = `
     ${headerTemplate(INITIAL_GAME)}
-    ${singleTemplate(currentOption)}
+    ${gameTemplate(currentOption)}
   `;
 
-  const nextOptions = questions.shift();
-  singleHandlers(nextOptions, nextGame);
+  const addHandler = questionsHandlers[type];
+  addHandler(nextGame);
 };
 
 // const endGame = () => {};
+// const reloadHeader = () => {};

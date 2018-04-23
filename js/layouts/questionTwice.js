@@ -22,16 +22,16 @@ export const twice = (questionData) => {
   };
 };
 
-export const twiceTemplate = () => {
+export const twiceTemplate = (option) => {
   return `<div class="game">
-  <p class="game__task">${twice.title}</p>
-  <form class="game__content  game__content--wide">
-    ${twice.optionsRendered}
+  <p class="game__task">${twice(option).title}</p>
+  <form class="game__content">
+    ${twice(option).optionsRendered}
   </form>
   </div>`;
 };
 
-export const twiceHandlers = (option, callback) => {
+export const twiceHandlers = (callback) => {
   const central = document.querySelector(`.central`);
 
   // перехожу к следующему вопросу, если выбраны оба варианта ответа

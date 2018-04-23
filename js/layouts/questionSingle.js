@@ -22,7 +22,7 @@ export const singleTemplate = (option) => {
   </div>`;
 };
 
-export const singleHandlers = (option, callback) => {
+export const singleHandlers = (callback) => {
   const central = document.querySelector(`.central`);
 
   const nextQuestion = () => {

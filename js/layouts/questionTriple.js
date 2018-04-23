@@ -14,16 +14,16 @@ export const triple = (questionData) => {
   };
 };
 
-export const tripleTemplate = () => {
+export const tripleTemplate = (option) => {
   return `<div class="game">
-  <p class="game__task">${triple.title}</p>
-  <form class="game__content  game__content--wide">
-    ${triple.optionsRendered}
+  <p class="game__task">${triple(option).title}</p>
+  <form class="game__content game__content--triple">
+    ${triple(option).optionsRendered}
   </form>
   </div>`;
 };
 
-export const tripleHandlers = (option, callback) => {
+export const tripleHandlers = (callback) => {
   const form = document.querySelector(`.game__content`);
   const gameOption = form.querySelectorAll(`.game__option`);
 
