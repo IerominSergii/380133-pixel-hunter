@@ -23,27 +23,6 @@ export const startGame = () => {
   nextGame();
 };
 
-// export const startGame = () => {
-//   const central = document.querySelector(`.central`);
-//   const currentOption = questions.shift();
-//   const type = currentOption.type;
-//   const gameTemplate = questionsTemplate[type];
-//
-//   const next = game.level + 1;
-//   game = changeLevel(game, next);
-//
-//   central.innerHTML = `
-//   ${headerTemplate(game)}
-//   ${gameTemplate(currentOption)}
-//   ${footerTemplate}
-//   `;
-//
-//   const addHandler = questionsHandlers[type];
-//   addHandler(nextGame);
-//
-//   return game;
-// };
-
 export const nextGame = () => {
   if (game.level === MAX_QUESTION_AMOUNT) {
     removeGame();
@@ -60,7 +39,7 @@ export const nextGame = () => {
   game = changeLevel(game, next);
 
   reloadGameScreen(central, `
-    ${headerTemplate(INITIAL_GAME)}
+    ${headerTemplate(game)}
     ${gameTemplate(currentOption)}`);
 
   const addHandler = questionsHandlers[type];
@@ -68,6 +47,3 @@ export const nextGame = () => {
 
   return game;
 };
-
-// const endGame = () => {};
-// const reloadHeader = () => {};

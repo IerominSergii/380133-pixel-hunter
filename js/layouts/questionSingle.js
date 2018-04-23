@@ -13,11 +13,28 @@ const gameOption = (option) => {
   </div>`;
 };
 
+export const single = (questionData) => {
+  return {
+    type: `single`,
+    title: `Угадай, фото или рисунок?`,
+    optionsRendered: `${gameOption(questionData)}`,
+    gameContentClass: `game__content--wide`,
+  };
+};
+
 export const singleTemplate = (option) => {
+  let extraClass;
+
+  if (single(option).gameContentClass) {
+    extraClass = single(option).gameContentClass;
+  } else {
+    extraClass = ``;
+  }
+
   return `<div class="game">
-  <p class="game__task">Угадай, фото или рисунок?</p>
-  <form class="game__content  game__content--wide">
-    ${gameOption(option)}
+  <p class="game__task">${single(option).title}</p>
+  <form class="game__content ${extraClass}">
+    ${single(option).optionsRendered}
   </form>
   </div>`;
 };

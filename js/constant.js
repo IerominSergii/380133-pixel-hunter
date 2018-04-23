@@ -1,4 +1,4 @@
-export const MAX_QUESTION_AMOUNT = 2;
+export const MAX_QUESTION_AMOUNT = 4;
 
 export const ANSWER_VALUE = {
   fast: 150,

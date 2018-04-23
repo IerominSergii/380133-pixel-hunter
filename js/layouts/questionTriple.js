@@ -8,16 +8,23 @@ export const triple = (questionData) => {
   return {
     type: `triple`,
     title: `Найдите рисунок среди изображений`,
-    optionsRendered: `<form class="game__content  game__content--triple">
-      ${questionData.options.map(getOption).join(``)}
-    </form>`,
+    optionsRendered: `${questionData.options.map(getOption).join(``)}`,
+    gameContentClass: `game__content--triple`,
   };
 };
 
 export const tripleTemplate = (option) => {
+  let extraClass;
+
+  if (triple(option).gameContentClass) {
+    extraClass = triple(option).gameContentClass;
+  } else {
+    extraClass = ``;
+  }
+
   return `<div class="game">
   <p class="game__task">${triple(option).title}</p>
-  <form class="game__content game__content--triple">
+  <form class="game__content ${extraClass}">
     ${triple(option).optionsRendered}
   </form>
   </div>`;
