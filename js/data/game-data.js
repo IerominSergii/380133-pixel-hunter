@@ -1,5 +1,5 @@
 export const INITIAL_GAME = Object.freeze({
-  answers: [`wrong`, `fast`, `fast`, `slow`, `slow`, `slow`, `correct`, `correct`, `correct`, `correct`],
+  results: [],
   level: 0,
   life: 3,
   timer: 30,

@@ -8,6 +8,7 @@ import {questionsTemplate, questionsHandlers} from './questions';
 import {addStatsNode} from './stats';
 import {MAX_QUESTION_AMOUNT} from './../constant';
 import {reloadGameScreen, removeGame} from './../util';
+// import {answerStatus} from '../constant';
 
 
 let game = Object.assign({}, INITIAL_GAME);
@@ -33,17 +34,20 @@ export const nextGame = () => {
   const central = document.querySelector(`.central`);
   const currentOption = questions.shift();
   const type = currentOption.type;
+
   const gameTemplate = questionsTemplate[type];
 
   const next = game.level + 1;
+
   game = changeLevel(game, next);
 
   reloadGameScreen(central, `
     ${headerTemplate(game)}
-    ${gameTemplate(currentOption)}`);
+    ${gameTemplate(currentOption, game)}`);
 
   const addHandler = questionsHandlers[type];
-  addHandler(nextGame);
+
+  addHandler(nextGame, game, currentOption);
 
   return game;
 };

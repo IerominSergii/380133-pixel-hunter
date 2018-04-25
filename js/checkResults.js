@@ -1,27 +1,27 @@
-import {MAX_QUESTION_AMOUNT, ANSWER_VALUE, LIFE_VALUE, answerStatus} from './constant.js';
+import {MAX_QUESTION_AMOUNT, ANSWER_VALUE, LIFE_VALUE, resultstatus} from './constant.js';
 
 // =========== POINTS ==========
 // посчитать заработанные набранные очки
 const countPoints = (gameObject) => {
-  const answers = gameObject.answers;
-  if (!Array.isArray(gameObject.answers)) {
-    throw new Error(`Wrong type of answers. Expected array`);
+  const results = gameObject.results;
+  if (!Array.isArray(gameObject.results)) {
+    throw new Error(`Wrong type of results. Expected array`);
   }
 
-  if (answers.length !== MAX_QUESTION_AMOUNT) {
+  if (results.length !== MAX_QUESTION_AMOUNT) {
     return -1;
   }
 
-  const wrongAnswers = answers.filter((item) => item === answerStatus.wrong);
-  if (wrongAnswers > 3) {
+  const wrongresults = results.filter((item) => item === resultstatus.wrong);
+  if (wrongresults > 3) {
     return -1;
   }
 
-  const fastAnswers = answers.filter((item) => item === answerStatus.fast);
-  const slowAnswers = answers.filter((item) => item === answerStatus.slow);
-  const correctAnswers = answers.filter((item) => item === answerStatus.correct);
+  const fastresults = results.filter((item) => item === resultstatus.fast);
+  const slowresults = results.filter((item) => item === resultstatus.slow);
+  const correctresults = results.filter((item) => item === resultstatus.correct);
 
-  const sumPoints = (fastAnswers.length * ANSWER_VALUE.fast + slowAnswers.length * ANSWER_VALUE.slow + correctAnswers.length * ANSWER_VALUE.correct);
+  const sumPoints = (fastresults.length * ANSWER_VALUE.fast + slowresults.length * ANSWER_VALUE.slow + correctresults.length * ANSWER_VALUE.correct);
 
   return sumPoints;
 };

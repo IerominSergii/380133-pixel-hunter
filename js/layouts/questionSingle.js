@@ -1,4 +1,4 @@
-const gameOption = (option) => {
+const getOptions = (option) => {
   const singleOption = option.options[0];
   return `<div class="game__option">
     <img src="${singleOption.src}" alt="${singleOption.alt}" width="705" height="455">
@@ -17,23 +17,15 @@ export const single = (questionData) => {
   return {
     type: `single`,
     title: `Угадай, фото или рисунок?`,
-    optionsRendered: `${gameOption(questionData)}`,
+    optionsRendered: `${getOptions(questionData)}`,
     gameContentClass: `game__content--wide`,
   };
 };
 
 export const singleTemplate = (option) => {
-  let extraClass;
-
-  if (single(option).gameContentClass) {
-    extraClass = single(option).gameContentClass;
-  } else {
-    extraClass = ``;
-  }
-
   return `<div class="game">
   <p class="game__task">${single(option).title}</p>
-  <form class="game__content ${extraClass}">
+  <form class="game__content ${single(option).gameContentClass}">
     ${single(option).optionsRendered}
   </form>
   </div>`;

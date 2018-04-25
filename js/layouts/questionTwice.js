@@ -1,4 +1,4 @@
-const gameOption = (option) => {
+const getOptions = (option) => {
   return `<div class="game__option">
     <img src="${option.src}" alt="${option.alt}" width="468" height="458">
     <label class="game__answer game__answer--photo">
@@ -16,7 +16,7 @@ export const twice = (questionData) => {
   return {
     type: `twice`,
     title: `Угадайте для каждого изображения фото или рисунок?`,
-    optionsRendered: `${questionData.options.map(gameOption).join(``)}`,
+    optionsRendered: `${questionData.options.map(getOptions).join(``)}`,
   };
 };
 
