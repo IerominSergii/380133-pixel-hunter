@@ -1,5 +1,5 @@
 import {startGame} from './../game.js';
-import {changeScreen} from './../util.js';
+import {changeScreen, backGreeting} from './../util.js';
 import {INITIAL_GAME} from '../data/game-data';
 
 // шаблон экрана с правилами игры
@@ -55,8 +55,10 @@ const addRulesHandlers = () => {
   const form = document.querySelector(`.rules__form`);
 
   const start = () => {
-    startGame(INITIAL_GAME);
+    startGame();
   };
+
+  backGreeting();
 
   form.addEventListener(`submit`, start);
 };

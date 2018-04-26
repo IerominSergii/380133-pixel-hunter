@@ -1,4 +1,4 @@
-import {addAfterBeginCentral} from './../createNode.js';
+import {fillNodeFromString} from './../createNode.js';
 import {renderRulesNode} from './rules.js';
 
 // шаблон приветственного экрана
@@ -25,6 +25,6 @@ const addGreetingHandlers = () => {
 
 // добавление экрана приветствия
 export const renderGreetingNode = () => {
-  addAfterBeginCentral(addGreetingTemplate);
+  fillNodeFromString(addGreetingTemplate);
   addGreetingHandlers();
 };

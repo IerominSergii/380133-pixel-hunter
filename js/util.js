@@ -1,4 +1,6 @@
 import {resultStatus} from './constant';
+import {renderGreetingNode} from './layouts/greeting';
+// import {INITIAL_GAME} from './data/game-data';
 
 export const changeScreen = (oldScreen, newTemplate) => {
   oldScreen.insertAdjacentHTML(`afterEnd`, newTemplate);
@@ -77,4 +79,11 @@ export const reloadResult = {
 
     return Object.assign({}, state, results, lifes);
   },
+};
+
+// возврат на экран приветствия
+export const backGreeting = () => {
+  const backButton = document.querySelector(`.back`);
+
+  backButton.addEventListener(`click`, renderGreetingNode);
 };
