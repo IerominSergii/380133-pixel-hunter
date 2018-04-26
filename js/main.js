@@ -1,9 +1,3 @@
-/*
- Набор импортированных значений
-*/
-import addIntroNode from './layouts/intro.js';
+import {renderIntroScreen} from './layouts/intro.js';
 
-/*
- Тело модуля
- */
-addIntroNode();
+renderIntroScreen();

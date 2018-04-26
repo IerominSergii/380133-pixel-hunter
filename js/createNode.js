@@ -1,18 +1,13 @@
-/*
-  Список констант
-*/
-// основной контейнер, в который загружаются экраны игры
-const nodeCentral = document.querySelector(`.central`);
-
 // fillNodeFromString - переписывает содержимое .central ноды
-// на переданное в innerContent
-const fillNodeFromString = (innerContent) => {
-  nodeCentral.innerHTML = innerContent;
+// на переданное в template
+export const fillNodeFromString = (template) => {
+  // основной контейнер, в который загружаются экраны игры
+  const element = document.querySelector(`.central`);
+  element.innerHTML = ``;
+  element.innerHTML = template;
 };
 
-/*
-  Набор экспортированных значений
-*/
-
-// экспортирую функцию
-export default fillNodeFromString;
+export const addAfterBeginCentral = (template) => {
+  const elementCentral = document.querySelector(`.central`);
+  elementCentral.insertAdjacentHTML(`afterBegin`, template);
+};

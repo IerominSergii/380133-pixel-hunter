@@ -1,13 +1,5 @@
-/*
- Набор импортированных значений
-*/
-import createNodeFromString from './../createNode.js';
-import addGame1Node from './game1.js';
-import {backToGreeting} from './greeting.js';
-
-/*
- Список констант
-*/
+import {startGame} from './../game.js';
+import {changeScreen, backGreeting} from './../util.js';
 
 // шаблон экрана с правилами игры
 const rulesTemplate = `<header class="header">
@@ -33,36 +25,14 @@ const rulesTemplate = `<header class="header">
     <input class="rules__input" type="text" placeholder="Ваше Имя">
     <button class="rules__button  continue" type="submit" disabled>Go!</button>
   </form>
-</div>
-<footer class="footer">
-  <a href="https://htmlacademy.ru" class="social-link social-link--academy">HTML Academy</a>
-  <span class="footer__made-in">Сделано в <a href="https://htmlacademy.ru" class="footer__link">HTML Academy</a> &copy; 2016</span>
-  <div class="footer__social-links">
-    <a href="https://twitter.com/htmlacademy_ru" class="social-link  social-link--tw">Твиттер</a>
-    <a href="https://www.instagram.com/htmlacademy/" class="social-link  social-link--ins">Инстаграм</a>
-    <a href="https://www.facebook.com/htmlacademy" class="social-link  social-link--fb">Фэйсбук</a>
-    <a href="https://vk.com/htmlacademy" class="social-link  social-link--vk">Вконтакте</a>
-  </div>
-</footer>`;
+</div>`;
 
-// добавление экрана с правилами
-const addRulesNode = () => {
-  createNodeFromString(rulesTemplate);
-
-  // функция возврата на экран приветствия по клику на кнопку "Назад"
-  backToGreeting();
-
+const disableFormBtn = () => {
   const form = document.querySelector(`.rules__form`);
   const input = form.querySelector(`.rules__input`);
   const submitFormBtn = form.querySelector(`.rules__button`);
 
-  // кнопка отправки отключена,
-  // пока в поле с именем игрока ничего не введено
-  submitFormBtn.setAttribute(`disabled`, ``);
-
-  // проверка, если введено имя,
-  // то кнопка становится активной
-  form.addEventListener(`input`, () => {
+  const isFormBtnEmpty = () => {
     if (input.value) {
       submitFormBtn.removeAttribute(`disabled`);
     } else {
@@ -70,17 +40,33 @@ const addRulesNode = () => {
         submitFormBtn.setAttribute(`disabled`, ``);
       }
     }
-  });
+  };
 
-  // вешаю обработчик перехода на страницу с первой игрой
-  // по отправке формы
-  form.addEventListener(`submit`, addGame1Node);
+  // автофокус
+  input.focus();
+  // кнопка отключена, пока в поле с ничего не введено
+  submitFormBtn.setAttribute(`disabled`, ``);
+  // если введено имя, то кнопка становится активной
+  form.addEventListener(`input`, isFormBtnEmpty);
 };
 
-/*
- Набор экспортированных значений
-*/
+const addRulesHandlers = () => {
+  const form = document.querySelector(`.rules__form`);
 
-// экспортирую функцию
-// добавления экрана с правилами
-export default addRulesNode;
+  const start = () => {
+    startGame();
+  };
+
+  backGreeting();
+
+  form.addEventListener(`submit`, start);
+};
+
+// добавление экрана с правилами
+export const renderRulesNode = () => {
+  const greeting = document.querySelector(`.greeting`);
+  changeScreen(greeting, rulesTemplate);
+
+  disableFormBtn();
+  addRulesHandlers();
+};
