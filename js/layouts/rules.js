@@ -1,6 +1,5 @@
 import {startGame} from './../game.js';
 import {changeScreen, backGreeting} from './../util.js';
-import {INITIAL_GAME} from '../data/game-data';
 
 // шаблон экрана с правилами игры
 const rulesTemplate = `<header class="header">
