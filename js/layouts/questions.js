@@ -1,4 +1,4 @@
-import {renderStats} from './statsTemplate';
+import {renderStats} from './stats';
 import {reloadResult} from '../util';
 
 const getOptions = {
@@ -34,6 +34,7 @@ const getOptions = {
     </div>`;
   },
 };
+
 
 const data = {
   single(questionData) {
@@ -91,6 +92,7 @@ export const questionsTemplate = {
     </div>`;
   },
 };
+
 
 export const questionsHandlers = {
   single(callback, game, option, type) {

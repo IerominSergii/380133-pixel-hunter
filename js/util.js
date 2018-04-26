@@ -5,6 +5,7 @@ export const changeScreen = (oldScreen, newTemplate) => {
   oldScreen.remove();
 };
 
+// ====== перезагрузка экрана игры ======
 export const reloadGameScreen = (container, template) => {
   const header = document.querySelector(`.header`);
   const game = document.querySelector(`.game`);
@@ -25,6 +26,7 @@ export const removeGame = () => {
   game.remove();
 };
 
+// ====== изменение результатов игры ======
 export const reloadResult = {
   single(state, inputElement, currentOption) {
     let results = state.results;

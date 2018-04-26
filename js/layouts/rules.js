@@ -1,4 +1,4 @@
-import {startGame} from './game.js';
+import {startGame} from './../game.js';
 import {changeScreen} from './../util.js';
 import {INITIAL_GAME} from '../data/game-data';
 

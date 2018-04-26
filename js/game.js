@@ -1,13 +1,13 @@
-import {headerTemplate} from './header.js';
-import {changeLevel} from './../data/game-data.js';
+import {headerTemplate} from './layouts/header.js';
+import {changeLevel} from './data/game-data.js';
 
-import {questions} from './../data/questions-data.js';
-import {footerTemplate} from './footer.js';
+import {questions} from './data/questions-data.js';
+import {footerTemplate} from './layouts/footer.js';
 
-import {questionsTemplate, questionsHandlers} from './questions.js';
-import {addStatsNode} from './stats.js';
-import {MAX_QUESTION_AMOUNT} from './../constant.js';
-import {reloadGameScreen, removeGame} from './../util.js';
+import {questionsTemplate, questionsHandlers} from './layouts/questions.js';
+import {addStatsNode} from './layouts/statsFinal.js';
+import {MAX_QUESTION_AMOUNT} from './constant.js';
+import {reloadGameScreen, removeGame} from './util.js';
 
 // startGame
 export const startGame = (stateGame) => {

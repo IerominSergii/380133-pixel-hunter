@@ -29,7 +29,7 @@ const addIntroHandlers = () => {
 };
 
 // добавление экрана загрузки
-const renderIntroScreen = () => {
+export const renderIntroScreen = () => {
   fillNodeFromString(`
     ${addIntroTemplate}
     ${footerTemplate}
@@ -37,5 +37,3 @@ const renderIntroScreen = () => {
 
   addIntroHandlers();
 };
-
-export {renderIntroScreen};

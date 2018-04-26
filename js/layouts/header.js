@@ -1,7 +1,7 @@
 const heartEmpty = `<img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">`;
 const heartFull = `<img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">`;
 
-const headerTemplate = (state) => {
+export const headerTemplate = (state) => {
   const header = `<header class="header">
     <div class="header__back">
       <button class="back">
@@ -17,5 +17,3 @@ const headerTemplate = (state) => {
   </header>`;
   return header;
 };
-
-export {headerTemplate};
