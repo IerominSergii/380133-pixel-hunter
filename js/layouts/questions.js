@@ -1,5 +1,5 @@
 import {renderStats} from './statsTemplate';
-import {reloadResultSingle, reloadResultTwice, reloadResultTriple} from '../util';
+import {reloadResult} from '../util';
 
 const getOptions = {
   single(option) {
@@ -93,21 +93,21 @@ export const questionsTemplate = {
 };
 
 export const questionsHandlers = {
-  single(callback, game, option) {
+  single(callback, game, option, type) {
     const central = document.querySelector(`.central`);
     const gameContent = central.querySelector(`.game__content`);
 
     const nextQuestion = () => {
       const inputElement = central.querySelector(`input:checked`);
       if (inputElement) {
-        game = reloadResultSingle(game, inputElement, option);
+        game = reloadResult[type](game, inputElement, option);
         callback();
       }
     };
 
     gameContent.addEventListener(`change`, nextQuestion);
   },
-  twice(callback, game, option) {
+  twice(callback, game, option, type) {
     const central = document.querySelector(`.central`);
     const gameContent = central.querySelector(`.game__content`);
 
@@ -115,21 +115,21 @@ export const questionsHandlers = {
     const nextQuestion = () => {
       if (central.querySelectorAll(`input:checked`).length === 2) {
         const inputElements = central.querySelectorAll(`input:checked`);
-        game = reloadResultTwice(game, inputElements, option);
+        game = reloadResult[type](game, inputElements, option);
         callback();
       }
     };
 
     gameContent.addEventListener(`change`, nextQuestion);
   },
-  triple(callback, game, option) {
+  triple(callback, game, option, type) {
     const form = document.querySelector(`.game__content`);
     const gameOptions = form.querySelectorAll(`.game__option`);
 
     // по клику на любое из изображений - на след игру
     gameOptions.forEach((elem) => elem.addEventListener(`click`, (evt) => {
       const chosenElement = evt.target;
-      game = reloadResultTriple(game, gameOptions, option, chosenElement);
+      game = reloadResult[type](game, gameOptions, option, chosenElement);
       callback();
     }));
   },

@@ -1,4 +1,4 @@
-import {answerStatus} from './constant';
+import {resultStatus} from './constant';
 
 export const changeScreen = (oldScreen, newTemplate) => {
   oldScreen.insertAdjacentHTML(`afterEnd`, newTemplate);
@@ -25,45 +25,54 @@ export const removeGame = () => {
   game.remove();
 };
 
-export const reloadResultSingle = (state, inputElement, currentOption) => {
-  let results = state.results;
-  if (inputElement.value === currentOption.options[0].answer) {
-    results.push(answerStatus.correct);
-  } else {
-    results.push(answerStatus.wrong);
-  }
+export const reloadResult = {
+  single(state, inputElement, currentOption) {
+    let results = state.results;
+    let lifes = {life: state.life};
+    if (inputElement.value === currentOption.options[0].answer) {
+      results.push(resultStatus.correct);
+    } else {
+      results.push(resultStatus.wrong);
 
-  return Object.assign({}, state, results);
-};
+      lifes.life = state.life - 1;
+    }
 
-export const reloadResultTwice = (state, inputElements, currentOption) => {
-  let results = state.results;
-  const firstAnswer = currentOption.options[0].answer;
-  const secondAnswer = currentOption.options[1].answer;
-  const firstInputValue = inputElements[0].value;
-  const secondInputValue = inputElements[1].value;
+    return Object.assign({}, state, results, lifes);
+  },
+  twice(state, inputElements, currentOption) {
+    let results = state.results;
+    let lifes = {life: state.life};
+    const firstAnswer = currentOption.options[0].answer;
+    const secondAnswer = currentOption.options[1].answer;
+    const firstInputValue = inputElements[0].value;
+    const secondInputValue = inputElements[1].value;
 
-  if (firstInputValue === firstAnswer && secondInputValue && secondAnswer) {
-    results.push(answerStatus.correct);
-  } else {
-    results.push(answerStatus.wrong);
-  }
+    if (firstInputValue === firstAnswer && secondInputValue && secondAnswer) {
+      results.push(resultStatus.correct);
+    } else {
+      results.push(resultStatus.wrong);
 
-  return Object.assign({}, state, results);
-};
+      lifes.life = state.life - 1;
+    }
 
-export const reloadResultTriple = (state, gameOptions, currentOption, chosenElement) => {
-  let results = state.results;
+    return Object.assign({}, state, results, lifes);
+  },
+  triple(state, gameOptions, currentOption, chosenElement) {
+    let results = state.results;
+    let lifes = {life: state.life};
 
-  for (let i = 0; i < gameOptions.length; i++) {
-    gameOptions[i].dataset.answer = currentOption.options[i].answer;
-  }
+    for (let i = 0; i < gameOptions.length; i++) {
+      gameOptions[i].dataset.answer = currentOption.options[i].answer;
+    }
 
-  if (chosenElement.dataset.answer === `paint`) {
-    results.push(answerStatus.correct);
-  } else {
-    results.push(answerStatus.wrong);
-  }
+    if (chosenElement.dataset.answer === `paint`) {
+      results.push(resultStatus.correct);
+    } else {
+      results.push(resultStatus.wrong);
 
-  return Object.assign({}, state, results);
+      lifes.life = state.life - 1;
+    }
+
+    return Object.assign({}, state, results, lifes);
+  },
 };

@@ -1,5 +1,6 @@
 import {startGame} from './game.js';
 import {changeScreen} from './../util.js';
+import {INITIAL_GAME} from '../data/game-data';
 
 // шаблон экрана с правилами игры
 const rulesTemplate = `<header class="header">
@@ -53,7 +54,11 @@ const disableFormBtn = () => {
 const addRulesHandlers = () => {
   const form = document.querySelector(`.rules__form`);
 
-  form.addEventListener(`submit`, startGame);
+  const start = () => {
+    startGame(INITIAL_GAME);
+  };
+
+  form.addEventListener(`submit`, start);
 };
 
 // добавление экрана с правилами

@@ -1,34 +1,33 @@
-import {headerTemplate} from './header';
-import {INITIAL_GAME, changeLevel} from './../data/game-data';
+import {headerTemplate} from './header.js';
+import {changeLevel} from './../data/game-data.js';
 
-import {questions} from './../data/questions-data';
-import {footerTemplate} from './footer';
+import {questions} from './../data/questions-data.js';
+import {footerTemplate} from './footer.js';
 
-import {questionsTemplate, questionsHandlers} from './questions';
-import {addStatsNode} from './stats';
-import {MAX_QUESTION_AMOUNT} from './../constant';
-import {reloadGameScreen, removeGame} from './../util';
-// import {answerStatus} from '../constant';
+import {questionsTemplate, questionsHandlers} from './questions.js';
+import {addStatsNode} from './stats.js';
+import {MAX_QUESTION_AMOUNT} from './../constant.js';
+import {reloadGameScreen, removeGame} from './../util.js';
 
-
-let game = Object.assign({}, INITIAL_GAME);
-
-export const startGame = () => {
+// startGame
+export const startGame = (stateGame) => {
   const central = document.querySelector(`.central`);
+  let state = Object.assign({}, stateGame);
 
   central.innerHTML = `
-  ${headerTemplate(game)}
+  ${headerTemplate(state)}
   ${footerTemplate}
   `;
 
-  nextGame();
+  nextGame(state);
 };
 
-export const nextGame = () => {
-  if (game.level === MAX_QUESTION_AMOUNT) {
+// nextGame
+export const nextGame = (state) => {
+  if (state.level === MAX_QUESTION_AMOUNT) {
     removeGame();
-    addStatsNode();
-    return game;
+    addStatsNode(state);
+    return state;
   }
 
   const central = document.querySelector(`.central`);
@@ -37,17 +36,21 @@ export const nextGame = () => {
 
   const gameTemplate = questionsTemplate[type];
 
-  const next = game.level + 1;
+  const next = state.level + 1;
 
-  game = changeLevel(game, next);
+  state = changeLevel(state, next);
 
   reloadGameScreen(central, `
-    ${headerTemplate(game)}
-    ${gameTemplate(currentOption, game)}`);
+    ${headerTemplate(state)}
+    ${gameTemplate(currentOption, state)}`);
 
   const addHandler = questionsHandlers[type];
 
-  addHandler(nextGame, game, currentOption);
+  const toNextGame = () => {
+    nextGame(state);
+  };
 
-  return game;
+  addHandler(toNextGame, state, currentOption, type);
+
+  return state;
 };

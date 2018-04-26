@@ -8,7 +8,7 @@ export const ANSWER_VALUE = {
 
 export const LIFE_VALUE = 50;
 
-export const answerStatus = {
+export const resultStatus = {
   fast: `fast`,
   correct: `correct`,
   slow: `slow`,

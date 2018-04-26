@@ -1,10 +1,10 @@
-import {MAX_QUESTION_AMOUNT, ANSWER_VALUE, LIFE_VALUE, resultstatus} from './constant.js';
+import {MAX_QUESTION_AMOUNT, ANSWER_VALUE, LIFE_VALUE, resultStatus} from './constant.js';
 
 // =========== POINTS ==========
 // посчитать заработанные набранные очки
-const countPoints = (gameObject) => {
-  const results = gameObject.results;
-  if (!Array.isArray(gameObject.results)) {
+export const countPoints = (state) => {
+  const results = state.results;
+  if (!Array.isArray(state.results)) {
     throw new Error(`Wrong type of results. Expected array`);
   }
 
@@ -12,14 +12,14 @@ const countPoints = (gameObject) => {
     return -1;
   }
 
-  const wrongresults = results.filter((item) => item === resultstatus.wrong);
+  const wrongresults = results.filter((item) => item === resultStatus.wrong);
   if (wrongresults > 3) {
     return -1;
   }
 
-  const fastresults = results.filter((item) => item === resultstatus.fast);
-  const slowresults = results.filter((item) => item === resultstatus.slow);
-  const correctresults = results.filter((item) => item === resultstatus.correct);
+  const fastresults = results.filter((item) => item === resultStatus.fast);
+  const slowresults = results.filter((item) => item === resultStatus.slow);
+  const correctresults = results.filter((item) => item === resultStatus.correct);
 
   const sumPoints = (fastresults.length * ANSWER_VALUE.fast + slowresults.length * ANSWER_VALUE.slow + correctresults.length * ANSWER_VALUE.correct);
 
@@ -28,20 +28,20 @@ const countPoints = (gameObject) => {
 
 // =========== LIFES ==========
 // посчитать очки за оставш. жизни
-const countLifes = (gameObject) => {
-  if (gameObject.life < 0) {
+export const countLifes = (state) => {
+  if (state.life < 0) {
     throw new Error(`Wrong life amount. It can't be less than 0`);
   }
 
-  return gameObject.life * LIFE_VALUE;
+  return state.life * LIFE_VALUE;
 };
 
 // =========== SUM ==========
 // подсчет итоговых результатов игры
-export const checkGameResult = (gameObject) => {
+export const checkGameResult = (state) => {
 
-  const pointsResult = countPoints(gameObject);
-  const lifesResult = countLifes(gameObject);
+  const pointsResult = countPoints(state);
+  const lifesResult = countLifes(state);
 
   if (pointsResult === -1 || lifesResult === -1) {
     return -1;
