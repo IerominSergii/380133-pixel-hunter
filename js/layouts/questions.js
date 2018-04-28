@@ -1,3 +1,4 @@
+//  начни #8 Модельный показ module5-task1
 import {renderStats} from './stats';
 import {reloadResult} from '../util';
 
