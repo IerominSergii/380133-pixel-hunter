@@ -1,3 +1,8 @@
-import {renderIntroScreen} from './layouts/intro.js';
+// import {renderIntroScreen} from './layouts/intro.js';
+import IntroView from './game/intro-view';
+// import {fillNodeFromString} from './createNode';
 
-renderIntroScreen();
+const intro = new IntroView();
+intro.element();
+
+// renderIntroScreen();

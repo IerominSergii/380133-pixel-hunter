@@ -1,9 +1,6 @@
-export const createElement = (template = ``, containerClass = `.central`) => {
-  // основной контейнер, в который загружаются экраны игры
-  const container = document.querySelector(containerClass);
-  container.innerHTML = ``;
-  container.innerHTML = template.trim();
-};
+// import {createElement} from './util';
+import {addAfterBeginCentral} from './createNode';
+
 
 export default class AbstractView {
   constructor() {
@@ -27,7 +24,7 @@ export default class AbstractView {
   }
 
   render() {
-    return createElement(this.template);
+    return addAfterBeginCentral(this.template);
   }
 
   bind() {

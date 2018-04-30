@@ -1,6 +1,9 @@
 import {startGame} from './../game.js';
 import {changeScreen, backGreeting} from './../util.js';
 
+// import {GameView} from '../game/game-view.js';
+// import {questions} from '../data/questions-data';
+
 // шаблон экрана с правилами игры
 const rulesTemplate = `<header class="header">
   <div class="header__back">
@@ -49,6 +52,8 @@ const disableFormBtn = () => {
   // если введено имя, то кнопка становится активной
   form.addEventListener(`input`, isFormBtnEmpty);
 };
+
+// const game = new GameView(questions[0]);
 
 const addRulesHandlers = () => {
   const form = document.querySelector(`.rules__form`);

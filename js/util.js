@@ -87,3 +87,11 @@ export const backGreeting = () => {
 
   backButton.addEventListener(`click`, renderGreetingNode);
 };
+
+// вставка шаблона в элемент DOM-дерева (по умолчанию в ``.central`)
+export const createElement = (template = ``, containerClass = `.central`) => {
+  // основной контейнер, в который загружаются экраны игры
+  const container = document.querySelector(containerClass);
+  container.innerHTML = ``;
+  container.innerHTML = template.trim();
+};
