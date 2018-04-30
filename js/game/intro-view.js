@@ -1,6 +1,6 @@
 import AbstractView from '../abstract-view';
 
-export default class IntroView extends AbstractView {
+export class IntroView extends AbstractView {
   constructor() {
     super();
   }

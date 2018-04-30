@@ -1,5 +1,5 @@
-// import {createElement} from './util';
-import {addAfterBeginCentral} from './createNode';
+import {createElement} from './util';
+// import {addAfterBeginCentral} from './createNode';
 
 
 export default class AbstractView {
@@ -24,7 +24,7 @@ export default class AbstractView {
   }
 
   render() {
-    return addAfterBeginCentral(this.template);
+    return createElement(this.template);
   }
 
   bind() {

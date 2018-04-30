@@ -89,9 +89,21 @@ export const backGreeting = () => {
 };
 
 // вставка шаблона в элемент DOM-дерева (по умолчанию в ``.central`)
-export const createElement = (template = ``, containerClass = `.central`) => {
+export const addElement = (template, containerClass = `.central`) => {
   // основной контейнер, в который загружаются экраны игры
   const container = document.querySelector(containerClass);
   container.innerHTML = ``;
-  container.innerHTML = template.trim();
+  container.innerHTML = template;
+};
+
+export const createElement = (template = ``, tagName = `div`) => {
+  const outer = document.createElement(tagName);
+  outer.innerHTML = template;
+  return outer.firstChild;
+};
+
+export const changeView = (element, containerClass = `.central`) => {
+  const container = document.querySelector(containerClass);
+  container.innerHTML = ``;
+  container.appendChild(element);
 };

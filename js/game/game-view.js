@@ -1,5 +1,5 @@
-import {AbstractView} from '../abstract-view';
-import {data} from '../data/questions-type-data';
+import AbstractView from '../abstract-view';
+import data from '../data/questions-type-data';
 
 export default class GameView extends AbstractView {
   constructor(currentQuestion) {
