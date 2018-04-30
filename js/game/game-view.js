@@ -40,4 +40,19 @@ export default class GameView extends AbstractView {
     </form>
     </div>`;
   }
+
+  onAnswer() {
+  }
+
+  bind() {
+    const central = this.element.querySelector(`.central`);
+    const gameContent = central.querySelector(`.game__content`);
+
+    if (this.type === `triple`) {
+      const gameOptions = gameContent.querySelectorAll(`.game__option`);
+      gameOptions.forEach((elem) => elem.addEventListener(`click`, this.onAnswer));
+    } else {
+      gameContent.addEventListener(`change`, this.onAmswer);
+    }
+  }
 }
