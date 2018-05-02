@@ -1,6 +1,7 @@
 import AbstractView from '../abstract-view';
 import data from '../data/questions-type-data';
 
+
 export default class GameView extends AbstractView {
   constructor(currentQuestion) {
     super();
@@ -10,25 +11,41 @@ export default class GameView extends AbstractView {
   }
 
   get gameOptions() {
-    const label = (value, spanInner) => {
-      return `<label class="game__answer game__answer--photo">
-        <input name="${this.option.name}" type="radio" value="${value}">
-        <span>${spanInner}</span>
-      </label>`;
+    const getOptions = {
+      single(option) {
+        return `<div class="game__option">
+          <img src="${option.src}" alt="${option.alt}" width="705" height="455">
+          <label class="game__answer  game__answer--photo">
+            <input name="${option.name}" type="radio" value="photo">
+            <span>Фото</span>
+          </label>
+          <label class="game__answer  game__answer--wide  game__answer--paint">
+            <input name="${option.name}" type="radio" value="paint">
+            <span>Рисунок</span>
+          </label>
+        </div>`;
+      },
+      twice(option) {
+        return `<div class="game__option">
+          <img src="${option.src}" alt="${option.alt}" width="468" height="458">
+          <label class="game__answer game__answer--photo">
+            <input name="${option.name}" type="radio" value="photo">
+            <span>Фото</span>
+          </label>
+          <label class="game__answer game__answer--paint">
+            <input name="${option.name}" type="radio" value="paint">
+            <span>Рисунок</span>
+          </label>
+        </div>`;
+      },
+      triple(option) {
+        return `<div class="game__option">
+          <img src="${option.src}" alt="${option.alt}" width="304" height="455">
+        </div>`;
+      },
     };
 
-    const labelPhoto = label(`photo`, `Фото`);
-    const labelPaint = label(`paint`, `Рисунок`);
-    const labels = this.type === (`single` || `twice`) ? (labelPhoto + labelPaint) : ``;
-
-    const option = `
-    <div class="game__option">
-      <img src="${this.option.src}" alt="${this.option.alt}" width="304" height="455">
-      ${labels}
-    </div>`;
-
-    const gameOptions = this.type === (`twice` || `triple`) ? this.option.map(option.trim()).join(``) : option[0].trim();
-    return gameOptions;
+    return getOptions[this.type];
   }
 
   get gameTemplate() {

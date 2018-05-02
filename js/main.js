@@ -2,6 +2,7 @@ import IntroView from './game/intro-view';
 import GreetingView from './game/greeting-view';
 import RulesView from './game/rules-view';
 import HeaderView from './game/header-view';
+// import playGame from './game/game-screen';
 
 import {changeView} from './util';
 
@@ -10,6 +11,10 @@ const intro = new IntroView();
 const greeting = new GreetingView();
 const rules = new RulesView();
 const header = new HeaderView();
+
+rules.startGame = () => {
+  // playGame();
+};
 
 header.onBackArrowClick = () => {
   changeView(greeting.element);
