@@ -53,8 +53,6 @@ const disableFormBtn = () => {
   form.addEventListener(`input`, isFormBtnEmpty);
 };
 
-// const game = new GameView(questions[0]);
-
 const addRulesHandlers = () => {
   const form = document.querySelector(`.rules__form`);
 

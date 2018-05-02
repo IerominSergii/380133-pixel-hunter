@@ -1,3 +1,4 @@
+// import {createFragment} from './util';
 import {createElement} from './util';
 // import {addAfterBeginCentral} from './createNode';
 

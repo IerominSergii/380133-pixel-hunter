@@ -102,8 +102,25 @@ export const createElement = (template = ``, tagName = `div`) => {
   return outer.firstChild;
 };
 
-export const changeView = (element, containerClass = `.central`) => {
-  const container = document.querySelector(containerClass);
+
+// export const createFragment = (template) => {
+//   const templateElement = document.createElement(`div`);
+//   templateElement.innerHTML = template;
+//
+//   const nodes = templateElement.childNodes;
+//
+//   const fragment = document.createDocumentFragment();
+//
+//   for (const i = 0; i < nodes.length; i++) {
+//     fragment.appendChild(nodes[i]);
+//   }
+//
+//   return fragment;
+// };
+
+
+export const changeView = (element) => {
+  const container = document.querySelector(`.central`);
   container.innerHTML = ``;
   container.appendChild(element);
 };

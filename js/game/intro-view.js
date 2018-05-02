@@ -1,13 +1,8 @@
 import AbstractView from '../abstract-view';
 
-export class IntroView extends AbstractView {
-  constructor() {
-    super();
-  }
-
+export default class IntroView extends AbstractView {
   get template() {
-    return `
-      <div id="main" class="central__content">
+    return `<div id="main" class="central__content">
         <div id="intro" class="intro">
           <h1 class="intro__asterisk">*</h1>
           <p class="intro__motto"><sup>*</sup> Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.</p>
@@ -19,10 +14,11 @@ export class IntroView extends AbstractView {
   }
 
   bind() {
-    this.element.querySelector(`.intro__asterisk`).onclick = (evt) => {
+    const element = this.element.querySelector(`.intro__asterisk`);
+    element.addEventListener(`click`, (evt) => {
       evt.preventDefault();
 
       this.onAsteriskClick();
-    };
+    });
   }
 }
