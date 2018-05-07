@@ -20,6 +20,13 @@ export default class RulesView extends AbstractView {
     </div>`;
   }
 
+  removeRules() {
+    const rules = document.querySelector(`.rules`);
+    const header = document.querySelector(`.header`);
+    rules.remove();
+    header.remove();
+  }
+
   startGame() {
   }
 

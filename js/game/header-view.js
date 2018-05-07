@@ -1,9 +1,11 @@
 import AbstractView from '../abstract-view';
+import {createCustomElement} from '../util';
 
 export default class HeaderView extends AbstractView {
-  constructor(state = false) {
+  constructor(life, timer) {
     super();
-    this.state = state;
+    this.life = life;
+    this.time = timer;
   }
 
   get template() {
@@ -13,24 +15,26 @@ export default class HeaderView extends AbstractView {
 
     if (this.state) {
       extraTemplate = `</div>
-      <h1 class="game__timer">${this.state.timer}</h1>
+      <h1 class="game__timer">${this.time}</h1>
       <div class="game__lives">
-      ${new Array(3 - this.state.life).fill(heartEmpty).join(``)}
-      ${new Array(this.state.life).fill(heartFull).join(``)}
+      ${new Array(3 - this.life).fill(heartEmpty).join(``)}
+      ${new Array(this.life).fill(heartFull).join(``)}
       </div>`;
     }
 
-    return `<header class="header">
-      <div class="header__back">
+    return `<div class="header__back">
         <button class="back">
           <img src="img/arrow_left.svg" width="45" height="45" alt="Back">
           <img src="img/logo_small.svg" width="101" height="44">
         </button>
-        ${extraTemplate}
-    </header>`;
+        ${extraTemplate}`;
   }
 
   onBackArrowClick() {
+  }
+
+  render() {
+    return createCustomElement(this.template, `header`, `header`);
   }
 
   bind() {

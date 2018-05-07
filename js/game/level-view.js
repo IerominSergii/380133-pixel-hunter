@@ -2,7 +2,7 @@ import AbstractView from '../abstract-view';
 import data from '../data/questions-type-data';
 
 
-export default class GameView extends AbstractView {
+export default class LevelView extends AbstractView {
   constructor(currentQuestion) {
     super();
     this.type = currentQuestion.type;
@@ -48,9 +48,8 @@ export default class GameView extends AbstractView {
     return getOptions[this.type];
   }
 
-  get gameTemplate() {
-    return `
-    <div class="game">
+  get template() {
+    return `<div class="game">
     <p class="game__task">${this.data.title}</p>
     <form class="game__content ${this.data.extraClass}">
       ${this.gameOptions}
@@ -63,7 +62,7 @@ export default class GameView extends AbstractView {
 
   bind() {
     const central = this.element.querySelector(`.central`);
-    const gameContent = central.querySelector(`.game__content`);
+    const gameContent = this.element.querySelector(`.game__content`);
 
     if (this.type === `triple`) {
       const gameOptions = gameContent.querySelectorAll(`.game__option`);

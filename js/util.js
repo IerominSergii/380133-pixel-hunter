@@ -1,5 +1,5 @@
 import {resultStatus} from './constant';
-import {renderGreetingNode} from './layouts/greeting';
+// import {renderGreetingNode} from './layouts/greeting';
 // import {INITIAL_GAME} from './data/game-data';
 
 export const changeScreen = (oldScreen, newTemplate) => {
@@ -82,11 +82,11 @@ export const reloadResult = {
 };
 
 // возврат на экран приветствия
-export const backGreeting = () => {
-  const backButton = document.querySelector(`.back`);
-
-  backButton.addEventListener(`click`, renderGreetingNode);
-};
+// export const backGreeting = () => {
+//   const backButton = document.querySelector(`.back`);
+//
+//   backButton.addEventListener(`click`, renderGreetingNode);
+// };
 
 // вставка шаблона в элемент DOM-дерева (по умолчанию в ``.central`)
 export const addElement = (template, containerClass = `.central`) => {
@@ -96,10 +96,21 @@ export const addElement = (template, containerClass = `.central`) => {
   container.innerHTML = template;
 };
 
-export const createElement = (template = ``, tagName = `div`) => {
-  const outer = document.createElement(tagName);
+export const createElement = (template = ``) => {
+  const outer = document.createElement(`div`);
   outer.innerHTML = template;
   return outer.firstChild;
+};
+
+export const createCustomElement = (template = ``, tagName = `div`, elementClass = false) => {
+  const outer = document.createElement(tagName);
+  outer.innerHTML = template;
+
+  if (elementClass) {
+    outer.classList.add(elementClass);
+  }
+
+  return outer;
 };
 
 
@@ -124,3 +135,12 @@ export const changeView = (element) => {
   container.innerHTML = ``;
   container.appendChild(element);
 };
+
+export const updateView = (parent, view) => {
+  parent.innerHTML = ``;
+  parent.appendChild(view.element);
+};
+
+// export const createFragment = () => {
+//   const fragment = document.createDocumentFragment();
+// };
