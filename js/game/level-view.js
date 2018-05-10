@@ -1,5 +1,5 @@
 import AbstractView from '../abstract-view';
-import data from '../data/questions-type-data';
+import {data} from '../data/questions-type-data';
 import {createCustomElement} from '../util';
 
 
@@ -9,81 +9,37 @@ export default class LevelView extends AbstractView {
     this.type = currentQuestion.type;
     this.option = currentQuestion.options;
     this.data = data[this.type];
-    this.gameOptions = {
-      single: `<div class="game__option">
-          <img src="${this.option[0].src}" alt="${this.option[0].alt}" width="705" height="455">
-          <label class="game__answer  game__answer--photo">
-            <input name="${this.option[0].name}" type="radio" value="photo">
-            <span>Фото</span>
-          </label>
-          <label class="game__answer  game__answer--wide  game__answer--paint">
-            <input name="${this.option[0].name}" type="radio" value="paint">
-            <span>Рисунок</span>
-          </label>
-        </div>`,
-      twice: `<div class="game__option">
-          <img src="${this.option.src}" alt="${this.option.alt}" width="468" height="458">
-          <label class="game__answer game__answer--photo">
-            <input name="${this.option.name}" type="radio" value="photo">
-            <span>Фото</span>
-          </label>
-          <label class="game__answer game__answer--paint">
-            <input name="${this.option.name}" type="radio" value="paint">
-            <span>Рисунок</span>
-          </label>
-        </div>`,
-      triple: `<div class="game__option">
-        <img src="${this.option.src}" alt="${this.option.alt}" width="304" height="455">
-      </div>`,
-    };
   }
-
-  // get gameOptions() {
-  //   const getOptions = {
-  //     single(option) {
-  //       return `<div class="game__option">
-  //         <img src="${option.src}" alt="${option.alt}" width="705" height="455">
-  //         <label class="game__answer  game__answer--photo">
-  //           <input name="${option.name}" type="radio" value="photo">
-  //           <span>Фото</span>
-  //         </label>
-  //         <label class="game__answer  game__answer--wide  game__answer--paint">
-  //           <input name="${option.name}" type="radio" value="paint">
-  //           <span>Рисунок</span>
-  //         </label>
-  //       </div>`;
-  //     },
-  //     twice(option) {
-  //       return `<div class="game__option">
-  //         <img src="${option.src}" alt="${option.alt}" width="468" height="458">
-  //         <label class="game__answer game__answer--photo">
-  //           <input name="${option.name}" type="radio" value="photo">
-  //           <span>Фото</span>
-  //         </label>
-  //         <label class="game__answer game__answer--paint">
-  //           <input name="${option.name}" type="radio" value="paint">
-  //           <span>Рисунок</span>
-  //         </label>
-  //       </div>`;
-  //     },
-  //     triple(option) {
-  //       return `<div class="game__option">
-  //         <img src="${option.src}" alt="${option.alt}" width="304" height="455">
-  //       </div>`;
-  //     },
-  //   };
-  //
-  //   return getOptions[this.type];
-  // }
 
   get template() {
-    return `<p class="game__task">${this.data.title}</p>
-    <form class="game__content ${this.data.extraClass}">
-      ${this.gameOptions[this.type]}
-    </form>`;
+    switch (this.type) {
+      case `single`:
+        return `<p class="game__task">${data.single(this.option).title}</p>
+        <form class="game__content ${data.single(this.option).gameContentClass}">
+          ${data.single(this.option).optionsRendered}
+        </form>`;
+      case `twice`:
+        return `<p class="game__task">${data.twice(this.option).title}</p>
+        <form class="game__content">
+          ${data.twice(this.option).optionsRendered}
+        </form>`;
+      case `triple`:
+        return `<p class="game__task">${data.triple(this.option).title}</p>
+        <form class="game__content ${data.triple(this.option).gameContentClass}">
+          ${data.triple(this.option).optionsRendered}
+        </form>`;
+      default:
+        throw new Error(`Unknown question type: ${this.type}`);
+    }
   }
 
-  onAnswer() {
+  onSingleAnswer() {
+  }
+
+  onTwiceAnswer() {
+  }
+
+  onTripleAnswer() {
   }
 
   render() {
@@ -91,14 +47,48 @@ export default class LevelView extends AbstractView {
   }
 
   bind() {
-    // const central = this.element.querySelector(`.central`);
     const gameContent = this.element.querySelector(`.game__content`);
 
-    if (this.type === `triple`) {
-      const gameOptions = gameContent.querySelectorAll(`.game__option`);
-      gameOptions.forEach((elem) => elem.addEventListener(`click`, this.onAnswer));
-    } else {
-      gameContent.addEventListener(`change`, this.onAnswer);
+    switch (this.type) {
+      case `single`:
+        gameContent.addEventListener(`change`, () => {
+          const checkedInput = gameContent.querySelector(`input:checked`);
+          this.onSingleAnswer(checkedInput.value, this.option[0].answer);
+        });
+        break;
+      case `twice`:
+        gameContent.addEventListener(`change`, () => {
+          const checkedInputs = gameContent.querySelectorAll(`input:checked`);
+
+          // если есть оба ответа игрока
+          if (checkedInputs.length === 2) {
+            // userAnswerArray
+            const checkedInputsValue = [];
+            checkedInputsValue.forEach.call(checkedInputs, (it) => {
+              return it.value;
+            });
+
+            // rightAnswerArray
+            const rightAnswerArray = this.option.map((it) => {
+              return it.answer;
+            });
+
+            this.onTwiceAnswer(checkedInputsValue, rightAnswerArray);
+          }
+        });
+        break;
+      case `triple`:
+        const gameOptions = gameContent.querySelectorAll(`.game__option`);
+        gameOptions.forEach((elem, i) => {
+          elem.dataset.index = i;
+          elem.addEventListener(`click`, (evt) => {
+            const index = evt.target.dataset.index;
+            this.onTripleAnswer(this.option[index].answer);
+          });
+        });
+        break;
+      default:
+        throw new Error(`Wrong question type: ${this.type}`);
     }
   }
 }

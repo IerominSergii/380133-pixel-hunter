@@ -2,18 +2,18 @@ import AbstractView from '../abstract-view';
 import {createCustomElement} from '../util';
 
 export default class HeaderView extends AbstractView {
-  constructor(life, timer) {
+  constructor(life = false, timer = false) {
     super();
     this.life = life;
     this.time = timer;
   }
 
   get template() {
-    const extraTemplate = ``;
+    let extraTemplate = ``;
     const heartEmpty = `<img src="img/heart__empty.svg" class="game__heart" alt="Life" width="32" height="32">`;
     const heartFull = `<img src="img/heart__full.svg" class="game__heart" alt="Life" width="32" height="32">`;
 
-    if (this.state) {
+    if (this.life !== false && this.time !== false) {
       extraTemplate = `</div>
       <h1 class="game__timer">${this.time}</h1>
       <div class="game__lives">

@@ -82,11 +82,6 @@ export const reloadResult = {
 };
 
 // возврат на экран приветствия
-// export const backGreeting = () => {
-//   const backButton = document.querySelector(`.back`);
-//
-//   backButton.addEventListener(`click`, renderGreetingNode);
-// };
 
 // вставка шаблона в элемент DOM-дерева (по умолчанию в ``.central`)
 export const addElement = (template, containerClass = `.central`) => {
@@ -113,23 +108,6 @@ export const createCustomElement = (template = ``, tagName = `div`, elementClass
   return outer;
 };
 
-
-// export const createFragment = (template) => {
-//   const templateElement = document.createElement(`div`);
-//   templateElement.innerHTML = template;
-//
-//   const nodes = templateElement.childNodes;
-//
-//   const fragment = document.createDocumentFragment();
-//
-//   for (const i = 0; i < nodes.length; i++) {
-//     fragment.appendChild(nodes[i]);
-//   }
-//
-//   return fragment;
-// };
-
-
 export const changeView = (element) => {
   const container = document.querySelector(`.central`);
   container.innerHTML = ``;
@@ -141,6 +119,38 @@ export const updateView = (parent, view) => {
   parent.appendChild(view.element);
 };
 
-// export const createFragment = () => {
-//   const fragment = document.createDocumentFragment();
-// };
+// export replaceElement = (oldElement, newElement) => {};
+
+
+export const changeLevel = (game, level) => {
+  if (typeof level !== `number`) {
+    throw new Error(`Level should be type of number`);
+  }
+
+  if (level < 0) {
+    throw new Error(`Level shouldn't be negative value`);
+  }
+
+  return Object.assign({}, game, {
+    level
+  });
+};
+
+export const addResult = (game, result) => {
+  const results = game.results;
+  results.push(result);
+
+  return Object.assign({}, game, {
+    results
+  });
+};
+
+export const canContinue = (game) => game.life > 0;
+
+export const die = (game) => {
+  const life = game.life - 1;
+
+  return Object.assign({}, game, {
+    life
+  });
+};
