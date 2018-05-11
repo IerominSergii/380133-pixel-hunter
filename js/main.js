@@ -34,6 +34,10 @@ intro.onAsteriskClick = () => {
 greeting.onContinueClick = () => {
   changeView(rules.element);
 
+  // автофокус
+  const input = document.querySelector(`.rules__input`);
+  input.focus();
+
   gameContainer.prepend(header.element);
   gameContainer.append(footer.element);
 };

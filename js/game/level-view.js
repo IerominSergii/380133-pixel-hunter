@@ -1,14 +1,16 @@
 import AbstractView from '../abstract-view';
+import CurrentStats from './current-results-view';
 import {data} from '../data/questions-type-data';
 import {createCustomElement} from '../util';
 
 
 export default class LevelView extends AbstractView {
-  constructor(currentQuestion) {
+  constructor(currentQuestion, results) {
     super();
     this.type = currentQuestion.type;
     this.option = currentQuestion.options;
     this.data = data[this.type];
+    this.currentStats = new CurrentStats(results).template;
   }
 
   get template() {
@@ -17,17 +19,20 @@ export default class LevelView extends AbstractView {
         return `<p class="game__task">${data.single(this.option).title}</p>
         <form class="game__content ${data.single(this.option).gameContentClass}">
           ${data.single(this.option).optionsRendered}
-        </form>`;
+        </form>
+        ${this.currentStats}`;
       case `twice`:
         return `<p class="game__task">${data.twice(this.option).title}</p>
         <form class="game__content">
           ${data.twice(this.option).optionsRendered}
-        </form>`;
+        </form>
+        ${this.currentStats}`;
       case `triple`:
         return `<p class="game__task">${data.triple(this.option).title}</p>
         <form class="game__content ${data.triple(this.option).gameContentClass}">
           ${data.triple(this.option).optionsRendered}
-        </form>`;
+        </form>
+        ${this.currentStats}`;
       default:
         throw new Error(`Unknown question type: ${this.type}`);
     }
@@ -53,6 +58,7 @@ export default class LevelView extends AbstractView {
       case `single`:
         gameContent.addEventListener(`change`, () => {
           const checkedInput = gameContent.querySelector(`input:checked`);
+
           this.onSingleAnswer(checkedInput.value, this.option[0].answer);
         });
         break;
@@ -64,8 +70,8 @@ export default class LevelView extends AbstractView {
           if (checkedInputs.length === 2) {
             // userAnswerArray
             const checkedInputsValue = [];
-            checkedInputsValue.forEach.call(checkedInputs, (it) => {
-              return it.value;
+            [].forEach.call(checkedInputs, (it) => {
+              checkedInputsValue.push(it.value);
             });
 
             // rightAnswerArray
@@ -83,6 +89,7 @@ export default class LevelView extends AbstractView {
           elem.dataset.index = i;
           elem.addEventListener(`click`, (evt) => {
             const index = evt.target.dataset.index;
+
             this.onTripleAnswer(this.option[index].answer);
           });
         });

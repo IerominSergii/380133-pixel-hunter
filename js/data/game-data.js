@@ -18,3 +18,22 @@ export const changeLevel = (game, level) => {
     level
   });
 };
+
+export const addResult = (game, result) => {
+  const results = game.results;
+  results.push(result);
+
+  return Object.assign({}, game, {
+    results
+  });
+};
+
+export const canContinue = (game) => game.life > 0;
+
+export const die = (game) => {
+  const life = game.life - 1;
+
+  return Object.assign({}, game, {
+    life
+  });
+};

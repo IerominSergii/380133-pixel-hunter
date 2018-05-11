@@ -1,12 +1,13 @@
 import AbstractView from '../abstract-view';
 import {countPoints, countLifes, checkGameResult} from '../checkResults';
+import CurrentStats from './current-results-view';
 
 
 export default class StatsView extends AbstractView {
   constructor(state) {
     super();
     this.state = state;
-    this.results = state.results;
+    this.results = new CurrentStats(state.results).shortTemplate;
   }
 
   get template() {
@@ -17,7 +18,7 @@ export default class StatsView extends AbstractView {
           <td class="result__number">1.</td>
           <td colspan="2">
             <ul class="stats">
-            ${this.results.map((answer) => `<li class="stats__result stats__result--${answer}"></li>`).join(``)}
+            ${this.results}
             </ul>
           </td>
           <td class="result__points">×&nbsp;100</td>
@@ -53,7 +54,7 @@ export default class StatsView extends AbstractView {
           <td class="result__number">2.</td>
           <td>
             <ul class="stats">
-              ${this.results.map((answer) => `<li class="stats__result stats__result--${answer}"></li>`).join(``)}
+              ${this.results}
             </ul>
           </td>
           <td class="result__total"></td>
@@ -65,7 +66,7 @@ export default class StatsView extends AbstractView {
           <td class="result__number">3.</td>
           <td colspan="2">
             <ul class="stats">
-              ${this.results.map((answer) => `<li class="stats__result stats__result--${answer}"></li>`).join(``)}
+              ${this.results}
             </ul>
           </td>
           <td class="result__points">×&nbsp;100</td>

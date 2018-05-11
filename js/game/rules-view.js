@@ -46,8 +46,6 @@ export default class RulesView extends AbstractView {
         }
       };
 
-      // автофокус
-      input.focus();
       // кнопка отключена, пока в поле с ничего не введено
       submitFormBtn.setAttribute(`disabled`, ``);
       // если введено имя, то кнопка становится активной
