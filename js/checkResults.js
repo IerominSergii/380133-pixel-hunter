@@ -1,4 +1,5 @@
-import {MAX_QUESTION_AMOUNT, ANSWER_VALUE, LIFE_VALUE, resultStatus} from './constant.js';
+import {ANSWER_VALUE, LIFE_VALUE, resultStatus} from './constant.js';
+import {questions} from './data/questions-data';
 
 // =========== POINTS ==========
 // посчитать заработанные набранные очки
@@ -8,7 +9,7 @@ export const countPoints = (state) => {
     throw new Error(`Wrong type of results. Expected array`);
   }
 
-  if (results.length !== MAX_QUESTION_AMOUNT) {
+  if (results.length !== questions.length) {
     return -1;
   }
 

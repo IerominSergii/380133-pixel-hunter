@@ -169,15 +169,4 @@ export const questions = [
       },
     ],
   },
-  {
-    type: `single`,
-    options: [
-      {
-        src: `http://placehold.it/705x455`,
-        alt: `Option 1`,
-        name: `question1`,
-        answer: `paint`,
-      },
-    ],
-  },
 ];

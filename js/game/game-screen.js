@@ -5,7 +5,7 @@ import HeaderView from './header-view';
 import {INITIAL_GAME, changeLevel, addResult, canContinue, die} from '../data/game-data';
 import {createCustomElement, updateView} from './../util';
 import {questions} from '../data/questions-data';
-import {resultStatus, MAX_QUESTION_AMOUNT} from '../constant';
+import {resultStatus} from '../constant';
 
 let gameState = Object.assign({}, INITIAL_GAME);
 
@@ -16,20 +16,12 @@ const levelContainer = createCustomElement(``, `div`, `game`);
 gameFragment.appendChild(headerContainer);
 gameFragment.appendChild(levelContainer);
 
-export const isGameComplete = () => {
-  if (gameState.level >= MAX_QUESTION_AMOUNT) {
-    const end = new StatsView(gameState).element;
-    levelContainer.replaceWith(end);
-
-    updateView(headerContainer, new HeaderView());
-  }
-};
 
 const continueOrDie = () => {
   gameState = changeLevel(gameState, gameState.level + 1);
 
   if (canContinue(gameState)) {
-    updateGame(gameState);
+    playGame();
   } else {
     const end = new StatsView(gameState).element;
     levelContainer.replaceWith(end);
@@ -49,7 +41,6 @@ const onSingleUserAnswer = (userAnswer, rightAnswer) => {
   }
 
   continueOrDie();
-  isGameComplete();
 };
 
 const onTwiceUserAnswer = (userAnswerArray, rightAnswerArray) => {
@@ -61,7 +52,6 @@ const onTwiceUserAnswer = (userAnswerArray, rightAnswerArray) => {
   }
 
   continueOrDie();
-  isGameComplete();
 };
 
 const onTripleUserAnswer = (answer) => {
@@ -73,9 +63,7 @@ const onTripleUserAnswer = (answer) => {
   }
 
   continueOrDie();
-  isGameComplete();
 };
-
 
 const updateGame = (state) => {
   updateView(headerContainer, new HeaderView(state.life, state.timer));
@@ -89,6 +77,22 @@ const updateGame = (state) => {
   level.onTripleAnswer = onTripleUserAnswer;
 };
 
-updateGame(gameState);
+
+const completeGame = () => {
+  const end = new StatsView(gameState).element;
+  levelContainer.replaceWith(end);
+
+  updateView(headerContainer, new HeaderView());
+};
+
+const playGame = () => {
+  if (gameState.level >= questions.length) {
+    completeGame();
+  } else {
+    updateGame(gameState);
+  }
+};
+
+playGame();
 
 export default gameFragment;
