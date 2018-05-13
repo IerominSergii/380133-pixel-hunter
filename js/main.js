@@ -9,7 +9,7 @@ import {changeView} from './util';
 
 
 const intro = new IntroView();
-const greeting = new GreetingView();
+export const greeting = new GreetingView();
 const rules = new RulesView();
 const header = new HeaderView();
 const footer = new FooterView();
