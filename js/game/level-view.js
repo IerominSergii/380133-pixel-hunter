@@ -5,12 +5,12 @@ import {createCustomElement} from '../util';
 
 
 export default class LevelView extends AbstractView {
-  constructor(currentQuestion, results) {
+  constructor(currentQuestion, questionAmount, results) {
     super();
     this.type = currentQuestion.type;
     this.option = currentQuestion.options;
     this.data = data[this.type];
-    this.currentStats = new CurrentStats(results).template;
+    this.currentStats = new CurrentStats(results, questionAmount).template;
   }
 
   get template() {

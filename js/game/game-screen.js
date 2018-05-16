@@ -74,6 +74,8 @@ const continueOrDie = () => {
   }
 };
 
+
+// ===== переопределяю функции-исполнители в LevelView =====
 const onSingleUserAnswer = (userAnswer, rightAnswer) => {
   if (userAnswer === rightAnswer) {
     gameState = addResult(gameState, resultStatus.correct);
@@ -121,7 +123,7 @@ const updateGame = (state) => {
 
   let levelNumber = state.level;
   const currentQuestion = questions[levelNumber];
-  const level = new LevelView(currentQuestion, state.results);
+  const level = new LevelView(currentQuestion, questions.length, state.results);
   updateView(levelContainer, level);
   level.onSingleAnswer = onSingleUserAnswer;
   level.onTwiceAnswer = onTwiceUserAnswer;

@@ -1,5 +1,3 @@
-export const MAX_QUESTION_AMOUNT = 10;
-
 export const ANSWER_VALUE = {
   fast: 150,
   correct: 100,

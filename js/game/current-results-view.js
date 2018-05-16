@@ -1,19 +1,25 @@
 import AbstractView from '../abstract-view';
-import {MAX_QUESTION_AMOUNT} from '../constant';
 import {createCustomElement} from '../util';
+import {resultStatus} from '../constant';
 
 export default class CurrentStats extends AbstractView {
-  constructor(results) {
+  constructor(results, gameQuestionAmount) {
     super();
     this.results = results;
+    this.questionAmount = gameQuestionAmount;
     this.showenResults = this.resultsForView();
   }
 
   resultsForView() {
-    const unknownResultsAmount = MAX_QUESTION_AMOUNT - this.results.length;
-    const defaultResults = [`unknown`, `unknown`, `unknown`, `unknown`, `unknown`, `unknown`, `unknown`, `unknown`, `unknown`, `unknown`];
-    defaultResults.length = unknownResultsAmount;
-    const showenResults = this.results.concat(defaultResults);
+    // сколько неизвестных результатов
+    const unknownResultsAmount = this.questionAmount - this.results.length;
+
+    // копирую массив
+    const showenResults = this.results.map((it) => it);
+
+    for (let i = 0; i < unknownResultsAmount; i++) {
+      showenResults.push(resultStatus.unknown);
+    }
 
     return showenResults;
   }
