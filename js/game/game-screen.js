@@ -67,7 +67,7 @@ const continueOrDie = () => {
   if (canContinue(gameState)) {
     playGame();
   } else {
-    const end = new StatsView(gameState).element;
+    const end = new StatsView(gameState.results, gameState.life).element;
     levelContainer.replaceWith(end);
 
     updateView(headerContainer, new HeaderView());

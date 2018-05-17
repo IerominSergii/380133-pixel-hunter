@@ -3,9 +3,9 @@ import {questions} from './data/questions-data';
 
 // =========== POINTS ==========
 // посчитать заработанные набранные очки
-export const countPoints = (state) => {
-  const results = state.results;
-  if (!Array.isArray(state.results)) {
+export const countPoints = (results) => {
+  // const results = gameResults;
+  if (!Array.isArray(results)) {
     throw new Error(`Wrong type of results. Expected array`);
   }
 
@@ -29,20 +29,20 @@ export const countPoints = (state) => {
 
 // =========== LIFES ==========
 // посчитать очки за оставш. жизни
-export const countLifes = (state) => {
-  if (state.life < 0) {
+export const countLifes = (life) => {
+  if (life < 0) {
     throw new Error(`Wrong life amount. It can't be less than 0`);
   }
 
-  return state.life * LIFE_VALUE;
+  return life * LIFE_VALUE;
 };
 
 // =========== SUM ==========
 // подсчет итоговых результатов игры
-export const checkGameResult = (state) => {
+export const checkGameResult = (results, life) => {
 
-  const pointsResult = countPoints(state);
-  const lifesResult = countLifes(state);
+  const pointsResult = countPoints(results);
+  const lifesResult = countLifes(life);
 
   if (pointsResult === -1 || lifesResult === -1) {
     return -1;

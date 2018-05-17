@@ -1,13 +1,15 @@
 import AbstractView from '../abstract-view';
 import {countPoints, countLifes, checkGameResult} from '../checkResults';
 import CurrentStats from './current-results-view';
+import {questions} from '../data/questions-data';
 
 
 export default class StatsView extends AbstractView {
-  constructor(state) {
+  constructor(results, life) {
     super();
-    this.state = state;
-    this.results = new CurrentStats(state.results).shortTemplate;
+    this.results = results;
+    this.life = life;
+    this.resultsTemplate = new CurrentStats(this.results, questions.length).shortTemplate;
   }
 
   get template() {
@@ -18,11 +20,11 @@ export default class StatsView extends AbstractView {
           <td class="result__number">1.</td>
           <td colspan="2">
             <ul class="stats">
-            ${this.results}
+            ${this.resultsTemplate}
             </ul>
           </td>
           <td class="result__points">×&nbsp;100</td>
-          <td class="result__total">${countPoints(this.state)}</td>
+          <td class="result__total">${countPoints(this.results)}</td>
         </tr>
         <tr>
           <td></td>
@@ -36,7 +38,7 @@ export default class StatsView extends AbstractView {
           <td class="result__extra">Бонус за жизни:</td>
           <td class="result__extra">2&nbsp;<span class="stats__result stats__result--alive"></span></td>
           <td class="result__points">×&nbsp;50</td>
-          <td class="result__total">${countLifes(this.state)}</td>
+          <td class="result__total">${countLifes(this.life)}</td>
         </tr>
         <tr>
           <td></td>
@@ -46,7 +48,7 @@ export default class StatsView extends AbstractView {
           <td class="result__total">0</td>
         </tr>
         <tr>
-          <td colspan="5" class="result__total  result__total--final">${checkGameResult(this.state)}</td>
+          <td colspan="5" class="result__total  result__total--final">${checkGameResult(this.results, this.life)}</td>
         </tr>
       </table>
       <table class="result__table">
@@ -54,7 +56,7 @@ export default class StatsView extends AbstractView {
           <td class="result__number">2.</td>
           <td>
             <ul class="stats">
-              ${this.results}
+              ${this.resultsTemplate}
             </ul>
           </td>
           <td class="result__total"></td>
@@ -66,7 +68,7 @@ export default class StatsView extends AbstractView {
           <td class="result__number">3.</td>
           <td colspan="2">
             <ul class="stats">
-              ${this.results}
+              ${this.resultsTemplate}
             </ul>
           </td>
           <td class="result__points">×&nbsp;100</td>
