@@ -14,12 +14,13 @@ export default class CurrentStats extends AbstractView {
     // сколько неизвестных результатов
     const unknownResultsAmount = this.questionAmount - this.results.length;
 
-    // копирую массив
-    const showenResults = this.results.map((it) => it);
+    const unknownResults = [];
+    // задаю длину массива
+    unknownResults.length = unknownResultsAmount;
+    // заполняю значениями `unknown`
+    unknownResults.fill(resultStatus.unknown);
 
-    for (let i = 0; i < unknownResultsAmount; i++) {
-      showenResults.push(resultStatus.unknown);
-    }
+    const showenResults = this.results.concat(unknownResults);
 
     return showenResults;
   }

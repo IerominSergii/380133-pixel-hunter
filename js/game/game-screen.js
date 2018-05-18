@@ -23,17 +23,36 @@ const shortHeader = new HeaderView();
 const footer = new FooterView();
 
 const gameContainer = document.querySelector(`.central`);
+let gameState = Object.assign({}, INITIAL_GAME);
+//
+const gameFragment = document.createDocumentFragment();
+const headerContainer = createCustomElement(``, `header`, `header`);
+const levelContainer = createCustomElement(``, `div`, `game`);
+
+gameFragment.appendChild(headerContainer);
+gameFragment.appendChild(levelContainer);
 
 // ===== переопределяю функции-исполнители во вьюшках =====
 rules.startGame = () => {
   rules.removeRules();
   gameContainer.insertBefore(gameFragment, gameContainer.firstChild);
+
+  playGame();
 };
 
 shortHeader.onBackArrowClick = () => {
+  gameState = Object.assign({}, INITIAL_GAME);
+
   changeView(greeting.element);
   gameContainer.appendChild(footer.element);
 };
+
+// shortHeader.onBackArrowClick = () => {
+//   // gameState = Object.assign({}, INITIAL_GAME);
+//
+//   changeView(greeting.element);
+//   gameContainer.appendChild(footer.element);
+// };
 
 intro.onAsteriskClick = () => {
   changeView(greeting.element);
@@ -43,8 +62,9 @@ intro.onAsteriskClick = () => {
 greeting.onContinueClick = () => {
   changeView(rules.element);
 
-  // автофокус
+  // автофокус и очистка value input
   const input = document.querySelector(`.rules__input`);
+  input.value = ``;
   input.focus();
 
   gameContainer.prepend(shortHeader.element);
@@ -52,15 +72,6 @@ greeting.onContinueClick = () => {
 };
 
 // ===== game logic ======
-let gameState = Object.assign({}, INITIAL_GAME);
-
-const gameFragment = document.createDocumentFragment();
-const headerContainer = createCustomElement(``, `header`, `header`);
-const levelContainer = createCustomElement(``, `div`, `game`);
-
-gameFragment.appendChild(headerContainer);
-gameFragment.appendChild(levelContainer);
-
 const continueOrDie = () => {
   gameState = changeLevel(gameState, gameState.level + 1);
 
@@ -70,7 +81,7 @@ const continueOrDie = () => {
     const end = new StatsView(gameState.results, gameState.life).element;
     levelContainer.replaceWith(end);
 
-    updateView(headerContainer, new HeaderView());
+    updateView(headerContainer, shortHeader);
   }
 };
 
@@ -115,6 +126,8 @@ const updateGame = (state) => {
   const fullHeader = new HeaderView(state.life, state.timer);
 
   fullHeader.onBackArrowClick = () => {
+    gameState = Object.assign({}, INITIAL_GAME);
+
     changeView(greeting.element);
     gameContainer.appendChild(footer.element);
   };
@@ -132,7 +145,7 @@ const updateGame = (state) => {
 
 
 const completeGame = () => {
-  const end = new StatsView(gameState).element;
+  const end = new StatsView(gameState.results, gameState.life).element;
   levelContainer.replaceWith(end);
 
   updateView(headerContainer, new HeaderView());

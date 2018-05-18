@@ -1,9 +1,23 @@
+import {createCustomElement} from '../util';
+
+
 export const INITIAL_GAME = Object.freeze({
   results: [],
   level: 0,
   life: 3,
   timer: 30,
 });
+
+export const createGameFragment = () => {
+  const gameFragment = document.createDocumentFragment();
+  const headerContainer = createCustomElement(``, `header`, `header`);
+  const levelContainer = createCustomElement(``, `div`, `game`);
+
+  gameFragment.appendChild(headerContainer);
+  gameFragment.appendChild(levelContainer);
+
+  return gameFragment;
+};
 
 export const changeLevel = (game, level) => {
   if (typeof level !== `number`) {
@@ -36,4 +50,8 @@ export const die = (game) => {
   return Object.assign({}, game, {
     life
   });
+};
+
+export const resetGame = () => {
+  return Object.assign({}, INITIAL_GAME);
 };
