@@ -25,3 +25,15 @@ export const updateView = (parent, view) => {
   parent.innerHTML = ``;
   parent.appendChild(view.element);
 };
+
+export const cloneDeeply = (obj) => {
+  const output = Array.isArray(obj) ? [] : {};
+  for (let key in obj) {
+    if ({}.hasOwnProperty.call(obj, key)) {
+      let v = obj[key];
+      output[key] = (typeof v === `object`) ? cloneDeeply(v) : v;
+    }
+  }
+
+  return output;
+};

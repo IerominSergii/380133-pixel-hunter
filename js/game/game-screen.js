@@ -10,7 +10,7 @@ import StatsView from './stats-view';
 
 
 import {INITIAL_GAME, changeLevel, addResult, canContinue, die} from '../data/game-data';
-import {createCustomElement, updateView, changeView} from './../util';
+import {createCustomElement, updateView, changeView, cloneDeeply} from './../util';
 import {questions} from '../data/questions-data';
 import {resultStatus} from '../constant';
 
@@ -23,7 +23,7 @@ const shortHeader = new HeaderView();
 const footer = new FooterView();
 
 const gameContainer = document.querySelector(`.central`);
-let gameState = Object.assign({}, INITIAL_GAME);
+let gameState = cloneDeeply(INITIAL_GAME);
 //
 const gameFragment = document.createDocumentFragment();
 const headerContainer = createCustomElement(``, `header`, `header`);
@@ -41,7 +41,7 @@ rules.startGame = () => {
 };
 
 shortHeader.onBackArrowClick = () => {
-  gameState = Object.assign({}, INITIAL_GAME);
+  gameState = cloneDeeply(INITIAL_GAME);
 
   changeView(greeting.element);
   gameContainer.appendChild(footer.element);
@@ -126,7 +126,7 @@ const updateGame = (state) => {
   const fullHeader = new HeaderView(state.life, state.timer);
 
   fullHeader.onBackArrowClick = () => {
-    gameState = Object.assign({}, INITIAL_GAME);
+    gameState = cloneDeeply(INITIAL_GAME);
 
     changeView(greeting.element);
     gameContainer.appendChild(footer.element);
