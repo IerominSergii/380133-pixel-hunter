@@ -29,9 +29,6 @@ const gameFragment = document.createDocumentFragment();
 const headerContainer = createCustomElement(``, `header`, `header`);
 const levelContainer = createCustomElement(``, `div`, `game`);
 
-gameFragment.appendChild(headerContainer);
-gameFragment.appendChild(levelContainer);
-
 // ===== переопределяю функции-исполнители во вьюшках =====
 rules.startGame = () => {
   rules.removeRules();
@@ -46,13 +43,6 @@ shortHeader.onBackArrowClick = () => {
   changeView(greeting.element);
   gameContainer.appendChild(footer.element);
 };
-
-// shortHeader.onBackArrowClick = () => {
-//   // gameState = Object.assign({}, INITIAL_GAME);
-//
-//   changeView(greeting.element);
-//   gameContainer.appendChild(footer.element);
-// };
 
 intro.onAsteriskClick = () => {
   changeView(greeting.element);
@@ -138,11 +128,11 @@ const updateGame = (state) => {
   const currentQuestion = questions[levelNumber];
   const level = new LevelView(currentQuestion, questions.length, state.results);
   updateView(levelContainer, level);
+
   level.onSingleAnswer = onSingleUserAnswer;
   level.onTwiceAnswer = onTwiceUserAnswer;
   level.onTripleAnswer = onTripleUserAnswer;
 };
-
 
 const completeGame = () => {
   const end = new StatsView(gameState.results, gameState.life).element;
@@ -155,11 +145,13 @@ const playGame = () => {
   if (gameState.level >= questions.length) {
     completeGame();
   } else {
+    gameContainer.insertBefore(levelContainer, gameContainer.firstChild);
+    gameContainer.insertBefore(headerContainer, gameContainer.firstChild);
+
     updateGame(gameState);
   }
 };
 
 playGame();
 
-// export default gameFragment;
 export {intro};
