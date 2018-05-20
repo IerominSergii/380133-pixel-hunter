@@ -3,6 +3,7 @@ import GreetingView from './greeting-view';
 import RulesView from './rules-view';
 import HeaderView from './header-view';
 import FooterView from './footer-view';
+import CurrentStats from './current-results-view';
 
 
 import LevelView from './level-view';
@@ -126,8 +127,12 @@ const updateGame = (state) => {
 
   let levelNumber = state.level;
   const currentQuestion = questions[levelNumber];
-  const level = new LevelView(currentQuestion, questions.length, state.results);
+  const level = new LevelView(currentQuestion.type, currentQuestion.options);
   updateView(levelContainer, level);
+
+  // добавляю текущую статистику
+  const stats = new CurrentStats(state.results, questions.length);
+  document.querySelector(`.game`).appendChild(stats.element);
 
   level.onSingleAnswer = onSingleUserAnswer;
   level.onTwiceAnswer = onTwiceUserAnswer;
