@@ -16,15 +16,14 @@ describe(`Check game points`, () => {
   it(`should not allow a wrong type`, () => {
     const errorMessage = `Wrong type of results. Expected array`;
     // if got number instead array
-    assert.throws(() => checkGameResult([103]), errorMessage);
+    assert.throws(() => checkGameResult(103, 1), errorMessage);
     // if got string instead array
-    assert.throws(() => checkGameResult([`testString`]), errorMessage);
+    assert.throws(() => checkGameResult(`testString`, 2), errorMessage);
     // if got boolean instead array
-    assert.throws(() => checkGameResult([true]), errorMessage);
+    assert.throws(() => checkGameResult(true, 2), errorMessage);
     // if got undefined instead array
     let testUndefined;
-    const testUndefinedData = [testUndefined];
-    assert.throws(() => checkGameResult(testUndefinedData), errorMessage);
+    assert.throws(() => checkGameResult(testUndefined, 3), errorMessage);
   });
 
   it(`should count according answerValue (answer time)`, () => {
@@ -52,7 +51,8 @@ describe(`Check game points`, () => {
 
 describe(`Check game lifes`, () => {
   it(`should not allow the life amount less than 0`, () => {
+    const testResults = [`correct`, `correct`, `correct`, `correct`, `correct`, `correct`, `correct`, `correct`, `correct`, `correct`];
     const testLife = -2;
-    assert.throws(() => checkGameResult(testLife), `Wrong life amount. It can't be less than 0`);
+    assert.throws(() => checkGameResult(testResults, testLife), `Wrong life amount. It can't be less than 0`);
   });
 });
