@@ -1,5 +1,4 @@
 import AbstractView from '../abstract-view';
-// import CurrentStats from './current-results-view';
 import {getQuestionTemplate} from '../data/questions-type-data';
 import {createCustomElement} from '../util';
 
@@ -15,13 +14,24 @@ export default class LevelView extends AbstractView {
     return getQuestionTemplate(this.type, this.option);
   }
 
-  onSingleAnswer() {
+  isAnswerCorrect(type, userAnswer, rightAnswer = null) {
+    let result;
+    switch (type) {
+      case `single`:
+        result = (userAnswer === rightAnswer);
+        return result;
+      case `twice`:
+        result = (userAnswer[0] === rightAnswer[0] && userAnswer[1] === rightAnswer[1]);
+        return result;
+      case `triple`:
+        result = (userAnswer === `paint`);
+        return result;
+      default:
+        throw new Error(`Wrong question type: ${type}`);
+    }
   }
 
-  onTwiceAnswer() {
-  }
-
-  onTripleAnswer() {
+  onAnswer() {
   }
 
   render() {
@@ -36,7 +46,8 @@ export default class LevelView extends AbstractView {
         gameContent.addEventListener(`change`, () => {
           const checkedInput = gameContent.querySelector(`input:checked`);
 
-          this.onSingleAnswer(checkedInput.value, this.option[0].answer);
+          const result = this.isAnswerCorrect(this.type, checkedInput.value, this.option[0].answer);
+          this.onAnswer(result);
         });
         break;
       case `twice`:
@@ -56,7 +67,8 @@ export default class LevelView extends AbstractView {
               return it.answer;
             });
 
-            this.onTwiceAnswer(checkedInputsValue, rightAnswerArray);
+            const result = this.isAnswerCorrect(this.type, checkedInputsValue, rightAnswerArray);
+            this.onAnswer(result);
           }
         });
         break;
@@ -67,7 +79,8 @@ export default class LevelView extends AbstractView {
           elem.addEventListener(`click`, (evt) => {
             const index = evt.target.dataset.index;
 
-            this.onTripleAnswer(this.option[index].answer);
+            const result = this.isAnswerCorrect(this.type, this.option[index].answer);
+            this.onAnswer(result);
           });
         });
         break;

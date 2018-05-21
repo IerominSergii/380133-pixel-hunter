@@ -76,34 +76,9 @@ const continueOrDie = () => {
   }
 };
 
-
 // ===== переопределяю функции-исполнители в LevelView =====
-const onSingleUserAnswer = (userAnswer, rightAnswer) => {
-  if (userAnswer === rightAnswer) {
-    gameState = addResult(gameState, resultStatus.correct);
-  } else {
-    if (userAnswer !== rightAnswer) {
-      gameState = addResult(gameState, resultStatus.wrong);
-      gameState = die(gameState);
-    }
-  }
-
-  continueOrDie();
-};
-
-const onTwiceUserAnswer = (userAnswerArray, rightAnswerArray) => {
-  if (userAnswerArray[0] === rightAnswerArray[0] && userAnswerArray[1] === rightAnswerArray[1]) {
-    gameState = addResult(gameState, resultStatus.correct);
-  } else {
-    gameState = addResult(gameState, resultStatus.wrong);
-    gameState = die(gameState);
-  }
-
-  continueOrDie();
-};
-
-const onTripleUserAnswer = (answer) => {
-  if (answer === `paint`) {
+const onAnswer = (result) => {
+  if (result) {
     gameState = addResult(gameState, resultStatus.correct);
   } else {
     gameState = addResult(gameState, resultStatus.wrong);
@@ -134,9 +109,7 @@ const updateGame = (state) => {
   const stats = new CurrentStats(state.results, questions.length);
   document.querySelector(`.game`).appendChild(stats.element);
 
-  level.onSingleAnswer = onSingleUserAnswer;
-  level.onTwiceAnswer = onTwiceUserAnswer;
-  level.onTripleAnswer = onTripleUserAnswer;
+  level.onAnswer = onAnswer;
 };
 
 const completeGame = () => {
