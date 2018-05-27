@@ -6,7 +6,9 @@ import FooterView from './footer-view';
 import CurrentStats from './current-results-view';
 
 
-import LevelView from './level-view';
+import SingleQuestionView from './single-question-view';
+import TwiceQuestionView from './twice-question-view';
+import TripleQuestionView from './triple-question-view';
 import StatsView from './stats-view';
 
 
@@ -89,6 +91,7 @@ const onAnswer = (result) => {
 };
 
 const updateGame = (state) => {
+  // header
   const fullHeader = new HeaderView(state.life, state.timer);
 
   fullHeader.onBackArrowClick = () => {
@@ -100,9 +103,25 @@ const updateGame = (state) => {
 
   updateView(headerContainer, fullHeader);
 
+  // question view
   let levelNumber = state.level;
   const currentQuestion = questions[levelNumber];
-  const level = new LevelView(currentQuestion.type, currentQuestion.options);
+  let level;
+
+  switch (currentQuestion.type) {
+    case `single`:
+      level = new SingleQuestionView(currentQuestion.options);
+      break;
+    case `twice`:
+      level = new TwiceQuestionView(currentQuestion.options);
+      break;
+    case `triple`:
+      level = new TripleQuestionView(currentQuestion.options);
+      break;
+    default:
+      throw new Error(`Wrong question type`);
+  }
+
   updateView(levelContainer, level);
 
   // добавляю текущую статистику
@@ -116,7 +135,7 @@ const completeGame = () => {
   const end = new StatsView(gameState.results, gameState.life).element;
   levelContainer.replaceWith(end);
 
-  updateView(headerContainer, new HeaderView());
+  updateView(headerContainer, shortHeader);
 };
 
 const playGame = () => {

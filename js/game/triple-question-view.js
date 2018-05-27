@@ -7,16 +7,16 @@ class TripleQuestionView extends AbstractView {
     this.options = options;
   }
 
-  get getOptions() {
+  getOptions(option) {
     return `<div class="game__option">
-      <img src="${this.option.src}" alt="${this.option.alt}" width="304" height="455">
+      <img src="${option.src}" alt="${option.alt}" width="304" height="455">
     </div>`;
   }
 
   get template() {
     return `<p class="game__task">Найдите рисунок среди изображений</p>
     <form class="game__content game__content--triple">
-      ${this.options.map(this.getOptions.triple).join(``)}
+      ${this.options.map(this.getOptions).join(``)}
     </form>`;
   }
 

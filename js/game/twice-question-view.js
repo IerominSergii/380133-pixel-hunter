@@ -7,15 +7,15 @@ class TwiceQuestionView extends AbstractView {
     this.options = options;
   }
 
-  get getOptions() {
+  getOptions(option) {
     return `<div class="game__option">
-      <img src="${this.option.src}" alt="${this.option.alt}" width="468" height="458">
+      <img src="${option.src}" alt="${option.alt}" width="468" height="458">
       <label class="game__answer game__answer--photo">
-        <input name="${this.option.name}" type="radio" value="photo">
+        <input name="${option.name}" type="radio" value="photo">
         <span>Фото</span>
       </label>
       <label class="game__answer game__answer--paint">
-        <input name="${this.option.name}" type="radio" value="paint">
+        <input name="${option.name}" type="radio" value="paint">
         <span>Рисунок</span>
       </label>
     </div>`;
@@ -24,7 +24,7 @@ class TwiceQuestionView extends AbstractView {
   get template() {
     return `<p class="game__task">Угадайте для каждого изображения фото или рисунок?</p>
     <form class="game__content">
-      ${this.options.map(this.getOptions.twice).join(``)}
+      ${this.options.map(this.getOptions).join(``)}
     </form>`;
   }
 
