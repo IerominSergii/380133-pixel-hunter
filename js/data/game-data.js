@@ -1,25 +1,11 @@
-import {createCustomElement} from '../util';
-
-
-export const INITIAL_GAME = Object.freeze({
+const INITIAL_GAME = Object.freeze({
   results: [],
   level: 0,
   life: 3,
   timer: 30,
 });
 
-export const createGameFragment = () => {
-  const gameFragment = document.createDocumentFragment();
-  const headerContainer = createCustomElement(``, `header`, `header`);
-  const levelContainer = createCustomElement(``, `div`, `game`);
-
-  gameFragment.appendChild(headerContainer);
-  gameFragment.appendChild(levelContainer);
-
-  return gameFragment;
-};
-
-export const changeLevel = (game, level) => {
+const changeLevel = (game, level) => {
   if (typeof level !== `number`) {
     throw new Error(`Level should be of type number`);
   }
@@ -33,7 +19,7 @@ export const changeLevel = (game, level) => {
   });
 };
 
-export const addResult = (game, result) => {
+const addResult = (game, result) => {
   const results = game.results;
   results.push(result);
 
@@ -42,9 +28,9 @@ export const addResult = (game, result) => {
   });
 };
 
-export const canContinue = (game) => game.life > 0;
+const canContinue = (game) => game.life > 0;
 
-export const die = (game) => {
+const die = (game) => {
   const life = game.life - 1;
 
   return Object.assign({}, game, {
@@ -52,6 +38,13 @@ export const die = (game) => {
   });
 };
 
-export const resetGame = () => {
+const resetGame = () => {
   return Object.assign({}, INITIAL_GAME);
 };
+
+export {INITIAL_GAME};
+export {changeLevel};
+export {addResult};
+export {canContinue};
+export {die};
+export {resetGame};

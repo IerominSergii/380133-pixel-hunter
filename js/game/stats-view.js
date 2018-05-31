@@ -5,16 +5,17 @@ import {questions} from '../data/questions-data';
 
 
 export default class StatsView extends AbstractView {
-  constructor(results, life) {
+  constructor(results, life, title) {
     super();
     this.results = results;
     this.life = life;
+    this.title = title;
     this.resultsTemplate = new CurrentStats(this.results, questions.length).shortTemplate;
   }
 
   get template() {
     return `<div class="result">
-      <h1>Победа!</h1>
+      <h1>${this.title.toUpperCase()}</h1>
       <table class="result__table">
         <tr>
           <td class="result__number">1.</td>

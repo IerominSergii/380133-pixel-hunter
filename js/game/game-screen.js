@@ -15,7 +15,7 @@ import StatsView from './stats-view';
 import {INITIAL_GAME, changeLevel, addResult, canContinue, die} from '../data/game-data';
 import {createCustomElement, updateView, changeView, cloneDeeply} from './../util';
 import {questions} from '../data/questions-data';
-import {resultStatus} from '../constant';
+import {resultStatus, resultTitles} from '../constant';
 
 
 // создаю вьюшки
@@ -71,7 +71,7 @@ const continueOrDie = () => {
   if (canContinue(gameState)) {
     playGame();
   } else {
-    const end = new StatsView(gameState.results, gameState.life).element;
+    const end = new StatsView(gameState.results, gameState.life, resultTitles.defeat).element;
     levelContainer.replaceWith(end);
 
     updateView(headerContainer, shortHeader);
@@ -132,7 +132,7 @@ const updateGame = (state) => {
 };
 
 const completeGame = () => {
-  const end = new StatsView(gameState.results, gameState.life).element;
+  const end = new StatsView(gameState.results, gameState.life, resultTitles.win).element;
   levelContainer.replaceWith(end);
 
   updateView(headerContainer, shortHeader);
