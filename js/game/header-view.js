@@ -1,7 +1,7 @@
 import AbstractView from '../abstract-view';
 import {createCustomElement} from '../util';
 
-export default class HeaderView extends AbstractView {
+class HeaderView extends AbstractView {
   constructor(life = false, timer = false) {
     super();
     this.life = life;
@@ -43,3 +43,5 @@ export default class HeaderView extends AbstractView {
     backButton.addEventListener(`click`, this.onBackArrowClick);
   }
 }
+
+export default HeaderView;

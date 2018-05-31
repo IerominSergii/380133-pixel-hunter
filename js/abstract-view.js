@@ -1,6 +1,6 @@
 import {createElement} from './util';
 
-export default class AbstractView {
+class AbstractView {
   constructor() {
     if (new.target === AbstractView) {
       throw new Error(`Can't instantiate AbstractView, only concrete one`);
@@ -29,3 +29,5 @@ export default class AbstractView {
     // bind handlers is required
   }
 }
+
+export default AbstractView;

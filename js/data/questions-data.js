@@ -1,4 +1,4 @@
-export const questions = [
+const questions = [
   {
     type: `single`,
     options: [
@@ -170,3 +170,5 @@ export const questions = [
     ],
   },
 ];
+
+export {questions};

@@ -16,7 +16,7 @@ const resultStatus = {
 
 const resultTitles = {
   win: `Победа!`,
-  defeat: `Ты проиграл.`,
+  defeat: `Ты проиграл :(`,
 };
 
 export {ANSWER_VALUE};

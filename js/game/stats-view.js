@@ -4,7 +4,7 @@ import CurrentStats from './current-results-view';
 import {questions} from '../data/questions-data';
 
 
-export default class StatsView extends AbstractView {
+class StatsView extends AbstractView {
   constructor(results, life, title) {
     super();
     this.results = results;
@@ -89,3 +89,5 @@ export default class StatsView extends AbstractView {
     </div>`;
   }
 }
+
+export default StatsView;

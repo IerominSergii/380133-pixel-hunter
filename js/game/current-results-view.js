@@ -2,7 +2,7 @@ import AbstractView from '../abstract-view';
 import {createCustomElement} from '../util';
 import {resultStatus} from '../constant';
 
-export default class CurrentStats extends AbstractView {
+class CurrentStats extends AbstractView {
   constructor(results, gameQuestionAmount) {
     super();
     this.results = results;
@@ -43,3 +43,5 @@ export default class CurrentStats extends AbstractView {
     return createCustomElement(this.template, `div`, `stats`);
   }
 }
+
+export default CurrentStats;
